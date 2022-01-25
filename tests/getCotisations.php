@@ -1,124 +1,71 @@
-<?php 
-require '../app.soapClient.php';
+<?php
+	require '../app.soapClient.php';
+
+
+function voirCotisationImpayees ($cinmedecin)
+{
 	
+	$cotisationsNonPayer  = getCotisationNonPayer($cinmedecin);
+  	$yearListNotPaid    =   $cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
 
-  	if (isset($_POST['submit']))
-  	{	
-  		$cin = $_POST['cin'];
-  		$cotisationsPayer     = getCotisationPayer($cin); // JE285751
-  		$cotisationsNonPayer  = getCotisationNonPayer($cin); // EE541129
-  		$existeMedecin 		=	$cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->ExisteMedecin;
+//   if (isset($yearListPaid->AnneeVM)) {
+//     if (is_array($yearListPaid->AnneeVM)) {
+//       $AllYearPaid = $yearListPaid->AnneeVM;
+//       $LastYearPaid = $AllYearPaid[0];
+//     }
+//     else {
+//       $LastYearPaid = $yearListPaid->AnneeVM;
+//     }
+//   }
+//   else {
+//     $LastYearPaid = (object)array(
+//       'Annee' => 0,
+//       'AnneeMontant'  => 0
+//     );
+//   }
+	return $yearListNotPaid;
+}
+  
+function voirCotisationsPayees ($cin) 
+{
+	$cotisationsPayer     = getCotisationPayer($cin);
+	$yearListPaid       =   $cotisationsPayer->GetCotisationPayerAvecAuthResult->MedecinCotisation->listeAnnee;
+	
+	else 
+	{
+		$AnneeVMPaid = 0;
+	}
+	return $yearListPaid;
+}
 
-  		echo 'IMPAYEES <br>';
-  		var_dump($cotisationsPayer);
-  		echo '<br> PAYEES <br>';
-  		var_dump($cotisationsNonPayer);
+$impayees = voirCotisationImpayees('BE869839');
 
-  		if ($existeMedecin) 
-  		{
-	  		$yearListNotPaid    =   $cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
-	  		$yearListPaid    =   $cotisationsPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
+$AnneeVMPaid = voirCotisationsPayees('D139249');
 
-	  		var_dump($yearListPaid);
-
-	  		if (isset($yearListNotPaid->AnneeVM))
-	  		{
-	  			$AnneeVMNotPaid = $yearListNotPaid->AnneeVM;
-	  			if (is_array($AnneeVMNotPaid))
-			  	{
-			  		$tabNotPaid = 'array';
-			  	}
-			  	else
-			  	{
-			  		$tabNotPaid = 'object';
-			  	}
-	  		}
-	  		else
-	  		{
-	  			$tabNotPaid = 'none';
-	  		}
-
-	  		if (isset($yearListPaid->AnneeVM))
-	  		{
-	  			$AnneeVMPaid = $yearListPaid->AnneeVM;
-	  			if (is_array($AnneeVMPaid))
-	  			{
-	  				$tabPaid = 'array';
-	  			}
-	  			else {
-	  				$tabPaid = 'object';
-	  			}
-	  		}
-	  		else 
-	  		{
-	  			$tabPaid = 'none';
-	  		}
-
-	  		/*echo 'COTISATION NON PAYEES !!! <br>';
-	  		echo '<pre>';
-		  	var_dump($yearListNotPaid);
-		  	echo '</pre>';
-		  	echo 'COTISATION PAYEES !!! <br>';
-		  	echo '<pre>';
-		  	var_dump($yearListPaid);
-		  	echo '</pre>';*/
-		  	
-  		}
-  	}
 
 ?>
 
 
-<form action="#" method="post">
-	<input type="text" name="cin" value="" placeholder="CIN">
-	<input type="submit" name="submit" value="Voir">
-</form>
-
-
-<table cellpadding="4" cellspacing="4" border="1">
+<table>
 	<thead>
 		<tr>
-			<th>CIN</th>
-			<th>ID</th>
-			<th>Annee-Montant</th>
-			<th>Statut</th>
+			<td>Années</td>
+			<td>Montant</td>
+		</tr>
+		<tr>
+			
 		</tr>
 	</thead>
 	<tbody>
-		<?php if($tabNotPaid == 'array') { ?>
-			<?php for ($i=0; $i < count($AnneeVMNotPaid); $i++) { ?>
-				<tr>
-					<td><?php echo $cin ?></td>
-					<td><?php echo $AnneeVMNotPaid[$i]->Id ?></td>
-					<td><?php echo $AnneeVMNotPaid[$i]->AnneeMontant ?></td> 
-					<td>Non Payée</td>
-				</tr>
-			<?php } ?>
-		<?php } ?>
-	</tbody>
-</table>
+		<?php if (isset($yearListPaid->AnneeVM)) { ?>
 
-<br>
+			<?php $AnneeVMPaid = $yearListPaid->AnneeVM;
+				if(is_array($AnneeVMPaid))  { ?>
+				<?php for($i=0; $i<count($AnneeVMPaid);$i++) { ?>
 
-<table cellpadding="4" cellspacing="4" border="1">
-	<thead>
-		<tr>
-			<th>CIN</th>
-			<th>ID</th>
-			<th>Annee-Montant</th>
-			<th>Statut</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php if($tabPaid == 'array') { ?>
-			<?php for ($j=0; $j < count($AnneeVMPaid); $j++) { ?>
-				<tr>
-					<td><?php echo $cin ?></td>
-					<td><?php echo $AnneeVMPaid[$j]->Id ?></td>
-					<td><?php echo $AnneeVMPaid[$j]->AnneeMontant ?></td> 
-					<td>Payée</td>
-				</tr>
+				<?php } ?>
 			<?php } ?>
+
 		<?php } ?>
 	</tbody>
 </table>

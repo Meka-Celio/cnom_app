@@ -23,85 +23,40 @@
 	2017<input class="cel hide" type="checkbox" name="" id="33" value="33">
 
 <script>
-   
-	function switchActive (html) 
-	{
-		let active = false
-		
-		if (html.classList.contains('active'))
-		{
-			html.classList.remove('active')
-			active = false
-		}
-		else
-		{
-			html.classList.add('active')
-			active = true
-		}
-		return active
-	}
 
 // Le tableau des années
-let tabcell 		= document.querySelectorAll('.cel')   
+let checkBoxTabGlobal 		= document.querySelectorAll('.cel')   
 
 // Dernier element du tableau global
-let globalLastElement =  	tabcell[tabcell.length-1]
-
+let lastCheckBoxElement =  	checkBoxTabGlobal[checkBoxTabGlobal.length-1]	
 // Initialisation
-if (globalLastElement.classList.contains('hide'))
+if (lastCheckBoxElement.classList.contains('hide'))
 {
-	globalLastElement.classList.remove('hide')
+	lastCheckBoxElement.classList.remove('hide')
 }
+// Initialisation tableau de tous les inputs
+let checkBoxTab 		=	Object.values(checkBoxTabGlobal)
 
-// tableau global des annees
-let globalCheckTab 			= document.querySelectorAll('.hide') 
-let tabCheck 				= Object.values(globalCheckTab)
-
-let estActive = false
-
-globalLastElement.addEventListener ('click', () =>
+for (let i=0; i < checkBoxTab.length; i++)
 {
-	let coche = switchActive(globalLastElement)
-	if (coche)
-	{
-		estActive = true
-	}
-	else {
-		estActive = false
-	}
-})
-
-// Boucle pour gerer la selection
-for (let i=0; i < globalCheckTab.length; i++)
-{	
-	// Si on click sur un checkbox
-	globalCheckTab[i].addEventListener('click', () => 
-	{
-		let self 	= globalCheckTab[i]
-		let coche 	= switchActive(self)
-
-		tabCheck = globalCheckTab
-		let index = tabCheck.length-1
-		let previousElement = tabCheck[index]
-
-		// extraction du tableau de active
-		for (j=0; j < tabCheck.length; j++)
+	let checkbox = checkBoxTab[i]
+	checkbox.addEventListener('change', function(){
+		if (lastCheckBoxElement.checked)
 		{
-
-		}
-
-		if (globalLastElement.checked)
-		{
-			if (coche)
-			{
-				previousElement.classList.remove('hide')
+			let last = checkBoxTab[length-1]
+			if (checkbox.classList.contains('hide')) {
+				checkbox.classList.remove('hide')
 			}
-			else {
-				previousElement.classList.add('hide')
+		}
+		else {
+			for (j=0; j < checkBoxTab.length; j++)
+			{
+				if ()
 			}
 		}
 	})
 }
+
 
 
 </script>
