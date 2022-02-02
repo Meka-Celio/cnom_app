@@ -106,6 +106,19 @@ Mes Classes
     padding-top: 5px;
 }
 
+.notif {
+    font-size: 18px;
+    text-align: center;
+}
+
+.link-file {
+    max-width: 330px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px 0;
+}
+
+
 @media screen and (max-width: 768px) {
     a.logo {
         font-size: 16px;

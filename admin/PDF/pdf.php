@@ -21,6 +21,7 @@
         $Somme                          =   $_POST['Somme'];
     }
 
+    $pdf_name = str_replace('/', '_', $NumRecu);
 
     ob_start();
     require 'index.php';  
@@ -41,5 +42,5 @@
 
     $dompdf->render();
 
-    $dompdf->stream();
+    $dompdf->stream("recu_$pdf_name.pdf");
 

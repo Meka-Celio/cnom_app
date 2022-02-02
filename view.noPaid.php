@@ -48,9 +48,9 @@
                                         <!-- Si la derniere annee payée < Annee non payée -->
                                         <?php if ($AnneeVMNotPaid[$i]->Annee > $LastYearPaid->Annee) { ?>
                                           <tr>
-                                              
                                               <td>
-                                                <input type="checkbox" id="" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" placeholder="">
+                                                <label for=""><?= $AnneeVMNotPaid[$i]->Annee; ?></label>
+                                                <input type="checkbox" id="" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" aria-details="<?= $i ?>" placeholder="">
                                               </td>
                                               <td><?php echo $AnneeVMNotPaid[$i]->Id ?></td>
                                               <td><?= $AnneeVMNotPaid[$i]->Annee; ?></td>
@@ -61,7 +61,7 @@
                                           <?php  } ?>
                                      <!-- /endfor -->
                                      <?php if ($medecin->CINMedecin == '*11') { ?>
-                                      <tr>
+                                      <!-- <tr>
                                         <td>
                                           <input type="checkbox" name="NotPaid[]" value="2030 - 1">
                                         </td>
@@ -69,7 +69,7 @@
                                         <td>2030</td>
                                         <td>1</td>
                                         <td><p class="label label-danger"><b>Non Payée</b></p></td>
-                                      </tr>
+                                      </tr> -->
                                     <?php } ?>
                                     <tr><td colspan="4"><button class="btn btn-success">Payer ma cotisation</button></td></tr>
 

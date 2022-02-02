@@ -25,6 +25,7 @@
       $infoMedecin = $response->GetInfoMedecinAvecAuthResult;
     } 
 
+    $DBmedecin = getUserByCIN($CINMedecin);
     $searchTurple = searchTurple($CINMedecin);
 
     if ($searchTurple)

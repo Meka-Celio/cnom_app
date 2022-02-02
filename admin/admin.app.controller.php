@@ -187,11 +187,19 @@
             Si l'action est une connexion
             -------------------------------------------------*/
                (function () {
-                    $email      =   $_POST['email'];
-                    $pwd        =   $_POST['pwd'];
+                    $email      =   $_POST['Login'];
+                    $pwd        =   $_POST['Pwd'];
 
-                    // Si le mot de passe est vide
-                    header('Location:admin.view.dashboard.php');
+
+                    if ($email == 'TechCelio') {
+                        if ($pwd == '123soleil') {
+                            header('Location:admin.view.dashboard.php');
+                        }
+                    }
+                    else {
+                        header("Location:admin.login.php?msg=noUser");
+                    }
+                    
 
                 })();
                 break;

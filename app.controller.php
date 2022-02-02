@@ -178,7 +178,23 @@
                             elseif ($log == 1) 
                             {
                                 // echo "medecin existant mais pas dans la base";
-                                header("Location:form.register.php?msg=RegisterCIN&CIN=$CINMedecin");
+                                // header("Location:form.register.php?msg=RegisterCIN&CIN=$CINMedecin");
+                                echo "Nouvel enregistrement détecté !";
+                                $getInfo = getInfoMedecin($CINMedecin);
+                                
+                                $informationMedecin = $getInfo->GetInfoMedecinAvecAuthResult;
+
+                                $Wcin = $informationMedecin->Cin;
+                                $WNom = 'Dr '.$informationMedecin->NomComplet;
+                                $WPwd = '12345';
+                                $WEmail = $informationMedecin->Email;
+                                $WTelephone = $informationMedecin->TelephoneMobile;
+                                $WNom_Province = $informationMedecin->LibelleProvince;
+                                $WNom_Region = $informationMedecin->LibelleRegion;
+                                $Wdate = date('Y-m-d');
+
+                                echo "$Wcin, $WNom a pour mail : $WEmail. Telephone : $WTelephone, de $WNom_Province dnas la région de $WNom_Region est enregistré le $Wdate";
+                                // ID_Medecin   CINMedecin  Nom_Medecin     Email   Pwd     Telephone   IdProvince  NomProvince     IdRegion    NomRegion   Date_Inscription    Date_Modification   
                             }
                             else 
                             {

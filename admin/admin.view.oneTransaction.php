@@ -42,10 +42,10 @@
                       <tr>
                         <th>CIN</th>
                         <th>Nom</th>
-                        <th>N° Autorisation</th>
+                        <th>Mail</th>
+                        <th>Années Payées</th>
                         <th>N° Commande</th>
                         <th>Montant</th>
-                        <th>Années Payées</th>
                         <th>Date Paiement</th>
                         <th>Heure</th>
                       </tr>
@@ -54,10 +54,10 @@
                       <tr>
                           <td><?php echo $oneTransaction->CIN ?></td>
                           <td><?php echo $oneTransaction->Nom ?></td>
-                          <td><?php echo $oneTransaction->NAutorisation ?></td>
+                          <td><?php echo $oneTransaction->Email ?></td>
+                          <td><?php echo $oneTransaction->Annee ?></td>
                           <td><?php echo $oneTransaction->NCommande ?></td>
                           <td><?php echo $oneTransaction->Montant ?></td>
-                          <td><?php echo $oneTransaction->Annee ?></td>
                           <td><?php echo $oneTransaction->DatePaiement ?></td>
                           <td><?php echo $oneTransaction->HeurePaiement ?></td>
                         </tr>

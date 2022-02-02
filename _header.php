@@ -65,6 +65,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
+
+    <!-- Filtre -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -72,6 +75,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
+
   </head>
 
   <body>
@@ -104,3 +108,7 @@
                   <li clas="nav-item-notify"><a href="app.logout.php?msg=exit">Retour sur cnom.ma</a></li>
                 </ul>
             </div>
+
+            <div class="notif">
+        <p class="alert alert-info">Le service prendra fin à 21h30</p>
+      </div>

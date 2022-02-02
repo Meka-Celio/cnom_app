@@ -2,6 +2,10 @@
 		    	INFORMATION SUPPORT
 		    	-------------------------------------------------------- -->
 
+		    	<div class="link-file">
+		    		<a href="Coordonnées-CROM.csv" class="btn btn-warning file">Retrouvez içi, les coordonnées de votre CROM</a>
+		    	</div>
+
 		    	<div id="reclamBtn" class="container btn-support">
 		    		<a href="form.reclamation.php" class="btn btn-primary">Faire une réclamation si <br> la CIN n'est pas trouvée par la système</a>
 		    	</div>

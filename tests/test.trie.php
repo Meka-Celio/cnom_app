@@ -25,17 +25,21 @@
 <script>
 
 // Le tableau des années
-let checkBoxTabGlobal 		= document.querySelectorAll('.cel')   
+let checkBoxTab 		= document.querySelectorAll('.cel')   
 
 // Dernier element du tableau global
-let lastCheckBoxElement =  	checkBoxTabGlobal[checkBoxTabGlobal.length-1]	
+let lastCheckbox =  	checkBoxTab[checkBoxTab.length-1]	
 // Initialisation
-if (lastCheckBoxElement.classList.contains('hide'))
+if (lastCheckbox.classList.contains('hide'))
 {
-	lastCheckBoxElement.classList.remove('hide')
+	lastCheckbox.classList.remove('hide')
 }
 // Initialisation tableau de tous les inputs
-let checkBoxTab 		=	Object.values(checkBoxTabGlobal)
+let checkBoxHideTab		=	document.querySelectorAll('.hide')
+
+lastCheckbox.addEventListener('change', () => {
+	
+})
 
 for (let i=0; i < checkBoxTab.length; i++)
 {

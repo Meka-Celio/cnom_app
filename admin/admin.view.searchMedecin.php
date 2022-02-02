@@ -62,31 +62,7 @@
           </tfoot>
         </table>
 
-        <table cellpadding="2px" cellspacing="2px" border="1" class="bdMedecin">
-          <caption>Dans la base de données</caption>
-          <thead>
-            <tr>
-              <th>CIN</th>
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Tel</th>
-              <th>Province</th>
-              <th>Region</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <?php if (isset($DBmedecin)) { ?>
-              <td><?= $DBmedecin->CINMedecin ?></td>
-              <td><?= $DBmedecin->Nom_Medecin ?></td>
-              <td><?= $DBmedecin->Email ?></td>
-              <td><?= $DBmedecin->Telephone ?></td>
-              <td><?= $DBmedecin->NomProvince ?></td>
-              <td><?= $DBmedecin->NomRegion ?></td>
-              <?php } ?>
-            </tr>
-          </tbody>
-        </table>  -->
+          -->
 
 
         <h2>Original</h2>
@@ -119,6 +95,34 @@
             </div>
           </div>
         <?php } ?>
+
+
+          <table cellpadding="2px" cellspacing="2px" border="1" class="bdMedecin">
+          <caption>Dans la base de données</caption>
+          <thead>
+            <tr>
+              <th>CIN</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Tel</th>
+              <th>Province</th>
+              <th>Region</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <?php if (isset($DBmedecin)) { ?>
+              <td><?= $DBmedecin->CINMedecin ?></td>
+              <td><?= $DBmedecin->Nom_Medecin ?></td>
+              <td><?= $DBmedecin->Email ?></td>
+              <td><?= $DBmedecin->Telephone ?></td>
+              <td><?= $DBmedecin->NomProvince ?></td>
+              <td><?= $DBmedecin->NomRegion ?></td>
+              <?php } ?>
+            </tr>
+          </tbody>
+        </table>
+
 
         <?php if (isset($turples)) { ?>
           <h2 class="col-md-12">Turples</h2>
