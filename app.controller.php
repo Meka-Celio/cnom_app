@@ -179,7 +179,7 @@
                             {
                                 // echo "medecin existant mais pas dans la base";
                                 // header("Location:form.register.php?msg=RegisterCIN&CIN=$CINMedecin");
-                                echo "Nouvel enregistrement détecté !";
+                                // echo "Nouvel enregistrement détecté !";
                                 $getInfo = getInfoMedecin($CINMedecin);
                                 
                                 $informationMedecin = $getInfo->GetInfoMedecinAvecAuthResult;
@@ -187,14 +187,20 @@
                                 $Wcin = $informationMedecin->Cin;
                                 $WNom = 'Dr '.$informationMedecin->NomComplet;
                                 $WPwd = '12345';
-                                $WEmail = $informationMedecin->Email;
+                                $WEmail = "";
                                 $WTelephone = $informationMedecin->TelephoneMobile;
                                 $WNom_Province = $informationMedecin->LibelleProvince;
                                 $WNom_Region = $informationMedecin->LibelleRegion;
                                 $Wdate = date('Y-m-d');
 
-                                echo "$Wcin, $WNom a pour mail : $WEmail. Telephone : $WTelephone, de $WNom_Province dnas la région de $WNom_Region est enregistré le $Wdate";
-                                // ID_Medecin   CINMedecin  Nom_Medecin     Email   Pwd     Telephone   IdProvince  NomProvince     IdRegion    NomRegion   Date_Inscription    Date_Modification   
+                                // echo "$Wcin, $WNom a pour mail : $WEmail. Telephone : $WTelephone, de $WNom_Province dans la région de $WNom_Region est enregistré le $Wdate";
+
+                                $register = addMedecin ($Wcin, $WNom, $WEmail, $WPwd, $WTelephone, $WNom_Province, $WNom_Region, $Wdate, $Wdate);
+
+                                if ($register)
+                                {
+                                    header('Location:form.login.php?msg=loginOn');
+                                }
                             }
                             else 
                             {

@@ -110,5 +110,5 @@
             </div>
 
             <div class="notif">
-        <p class="alert alert-info">Le service prendra fin à 21h30</p>
+        <p class="alert alert-info">Le service prendra fin à 23H</p>
       </div>

@@ -19,7 +19,9 @@
 		    			<p>
 		    				En cas de soucis, contactez le support : <br>
 		    				<b>E-Mail : </b>support@cnom.ma <br>
-		    				<b>What's App : +212 669-382828</b>
+							<b>Telephone : </b>+ 212 520-190975<br>
+		    				<b>What's App : +212 669-382828</b> <br>
+							<b>Horaire : </b>09H - 23H <br>
 		    			</p>
 		    		</div>
 		    	</div>  
