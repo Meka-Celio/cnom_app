@@ -4,7 +4,7 @@
 
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Cotisations Impayées</h3>
+          	<h3><i class="fa fa-angle-right"></i> Cotisations Impayées</h3>
 
             <?php if (isset($msg)) { include('_utils.php'); } ?>
 
@@ -36,7 +36,7 @@
                                   <form action="app.controller.php?action=paiement" method="post">
 
                                     <!-- Si il y a plusieurs lignes -->
-                                    <?php if (is_array($AnneeVMNotPaid)) { ?>
+                                  <?php if (is_array($AnneeVMNotPaid)) { ?>
                                     <tr>
                                       <td>Dernière Année Payée</td>
                                       <td><?php echo $LastYearPaid->Annee ?></td>
@@ -50,7 +50,7 @@
                                           <tr>
                                               <td>
                                                 <label for=""><?= $AnneeVMNotPaid[$i]->Annee; ?></label>
-                                                <input type="checkbox" id="<?php echo $AnneeVMNotPaid[$i]->Id ?>" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" aria-details="<?= $i+1 ?>" placeholder=""> 
+                                                <input type="checkbox" id="<?php echo $AnneeVMNotPaid[$i]->Id ?>" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" aria-details="<?= $i ?>" placeholder=""> 
                                               </td>
                                               <td><?php echo $AnneeVMNotPaid[$i]->Id ?></td>
                                               <td><?= $AnneeVMNotPaid[$i]->Annee; ?></td>
@@ -74,8 +74,8 @@
                                     <tr><td colspan="4"><button class="btn btn-success">Payer ma cotisation</button></td></tr>
 
 
-                                    <!-- Si il y a une seule ligne -->
-                                    <?php } else { ?>
+                                  <!-- Si il y a une seule ligne -->
+                                  <?php } else { ?>
                                     <tr>
                                       <td>Dernière Année Payée</td>
                                       <td><?php echo $LastYearPaid->Annee ?></td>
@@ -97,9 +97,9 @@
                                       <?php } else { ?>
                                         <tr><td colspan="4"><button class="btn btn-success disabled">Payer ma cotisation</button></td></tr>
                                       <?php } ?>
-                                    <?php } ?> <!-- /end -->
-                                    <input type="hidden" name="CINMedecin" value="<?= $medecin->CINMedecin ?>">
-                                  </form>
+                                  <?php } ?> <!-- /end -->
+                                  <input type="hidden" name="CINMedecin" value="<?= $medecin->CINMedecin ?>">
+                                </form>
                                 <!-- Si il n'y a pas de cotisation -->
                                 <?php } else { ?>
                                     <tr>
@@ -112,9 +112,9 @@
                   </div><!-- /col-md-12 -->
               </div><!-- /row -->
 
-      </section><! --/wrapper -->
+		  </section><! --/wrapper -->
   </section>
-    <!-- /MAIN CONTENT -->
+	  <!-- /MAIN CONTENT -->
 
       <!--main content end-->
 

@@ -1,3 +1,12 @@
+<?php 
+
+	if (isset($_POST['submit']))
+	{
+		var_dump($_POST);
+	}
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +15,9 @@
 	<title>Filtre sur année</title>
 
 	<style type="text/css">
-	.hide {
+	/* .hide {
 		visibility: hidden;
-	}	
+	} */	
 
 
 </style>
@@ -16,52 +25,56 @@
 </head>
 <body>
 
-	2021<input class="cel hide" type="checkbox" name="" id="37" value="37">
-	2020<input class="cel hide" type="checkbox" name="" id="36" value="36">
-	2019<input class="cel hide" type="checkbox" name="" id="35" value="35">
-	2018<input class="cel hide" type="checkbox" name="" id="34" value="34">
-	2017<input class="cel hide" type="checkbox" name="" id="33" value="33">
+	<form action="#" method="post">
+		2021<input class="cel hide" type="checkbox" name="notPaid[]" id="37" value="2021 - 500" aria-details="0">
+		2020<input class="cel hide" type="checkbox" name="notPaid[]" id="36" value="2020 - 700" aria-details="1">
+		2019<input class="cel hide" type="checkbox" name="notPaid[]" id="35" value="2017 - 700" aria-details="2">
+		2018<input class="cel hide" type="checkbox" name="notPaid[]" id="34" value="2017 - 700" aria-details="3">
+		2017<input class="cel hide" type="checkbox" name="notPaid[]" id="33" value="2017 - 700" aria-details="4">
+
+		<input type="submit" name="submit" value="Regler ma cotisation">
+	</form>
 
 <script>
 
-// Le tableau des années
-let checkBoxTab 		= document.querySelectorAll('.cel')   
+window.addEventListener("DOMContentLoaded", (event) => {
 
-// Dernier element du tableau global
-let lastCheckbox =  	checkBoxTab[checkBoxTab.length-1]	
-// Initialisation
-if (lastCheckbox.classList.contains('hide'))
-{
-	lastCheckbox.classList.remove('hide')
-}
-// Initialisation tableau de tous les inputs
-let checkBoxHideTab		=	document.querySelectorAll('.hide')
+    var mesCheck = document.querySelectorAll("input[type=checkbox]")
+    var newT = []
+    var reverseT = []
+    var submitBTN = document.querySelector('input[type=submit]')
+    console.log(mesCheck)
 
-lastCheckbox.addEventListener('change', () => {
-	
-})
+    for (let index = mesCheck.length-1; index >= 0; index--) {
+        reverseT.push(mesCheck[index]) 
+    }
 
-for (let i=0; i < checkBoxTab.length; i++)
-{
-	let checkbox = checkBoxTab[i]
-	checkbox.addEventListener('change', function(){
-		if (lastCheckBoxElement.checked)
-		{
-			let last = checkBoxTab[length-1]
-			if (checkbox.classList.contains('hide')) {
-				checkbox.classList.remove('hide')
-			}
-		}
-		else {
-			for (j=0; j < checkBoxTab.length; j++)
-			{
-				if ()
-			}
-		}
-	})
-}
+    for (let index = 0; index < mesCheck.length; index++) {
+        newT.push(mesCheck[index])
+    }
+
+    submitBTN.addEventListener('submit', (e) => {
+
+    })
+
+    newT.forEach(input => {
+    	input.addEventListener('click', () => {
+    		let nbr = input.getAttribute('aria-details')
+    		for (let i = nbr; i < newT.length; i++){
+    			if (newT[i].checked)
+    			{
+    				input.checked = true
+    				console.log(input)
+    			}
+    			else {
+    				input.checked = false
+    			}
+    		}
+    	})
+    })
 
 
+});
 
 </script>
 

@@ -123,7 +123,8 @@
 
 	  		header('Location:admin.view.getRecu.php?msg=createCotOk');
 
-  		} // Fin de 'Si Recu de paiement'
+  		} 
+  		// Fin de 'Si Recu de paiement'
   		else 
   		{
   			header("Location:admin.view.addCotisation.php?msg=findCotFail");

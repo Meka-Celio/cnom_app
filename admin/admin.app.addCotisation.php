@@ -22,5 +22,6 @@
       	{
         	$msg = 'addCotFail';
       	}
+
       	header("Location:admin.view.addCotisation.php?msg=$msg&CINMedecin=$CINMedecin&NumTransaction=$NumTransaction&Annees=$IdParamCotisation");
 	}

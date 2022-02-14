@@ -49,7 +49,7 @@
 
     <?php } else if ($msg == 'loginOn') { ?>
         <div class="alert alert-success alert-banner">
-            Vos informations ont bien été enregistrées ! <b>Merci de vous connecter !</b>
+            Vos informations ont bien été enregistrées ! Merci de vous connecter en utilisant <b>votre mot de passe personnalisé!</b>
         </div>
 
     <?php } else if ($msg == 'payFail') { ?>

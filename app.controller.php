@@ -131,7 +131,8 @@
                     else 
                     {
                         // Vérification dans les cotisations
-                        $response       = getCotisationNonPayer($CINMedecin);
+                        $response       =   getCotisationNonPayer($CINMedecin);
+                        $responseInfo   =   getInfoMedecin($CINMedecin);
 
                         // Vérifier la CIN dans le webservice
                         $existeMedecin  =  $response->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->ExisteMedecin;
@@ -173,16 +174,17 @@
                             // Si non valide
                             if ($log == 0) 
                             {
-                                header('Location:form.login.php?msg=noExistCIN');
+                                // header('Location:form.login.php?msg=noExistCIN');
+                                echo "Aucun medecin n'a cette CIN";
                             }
+                            // Si le medecin existe dans le webservice mais pas dans labase de données
                             elseif ($log == 1) 
                             {
                                 // echo "medecin existant mais pas dans la base";
                                 // header("Location:form.register.php?msg=RegisterCIN&CIN=$CINMedecin");
                                 // echo "Nouvel enregistrement détecté !";
-                                $getInfo = getInfoMedecin($CINMedecin);
                                 
-                                $informationMedecin = $getInfo->GetInfoMedecinAvecAuthResult;
+                                $informationMedecin = $responseInfo->GetInfoMedecinAvecAuthResult;
 
                                 $Wcin = $informationMedecin->Cin;
                                 $WNom = 'Dr '.$informationMedecin->NomComplet;
@@ -229,14 +231,28 @@
                                     $medecin = getUser($DBCinMedecin, $DBPassword);
                                     session_start();
                                     $_SESSION['medecin']    = $medecin;
-                                    header('Location:view.dashboard.php?msg=loginOk');    
+
+                                    // Validation du mail 
+                                    // Si le medecin a un mail dans la base de données
+                                    $DBEmail = $medecin->Email;
+                                    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
+
+                                    if (preg_match($pattern, $DBEmail)) {
+                                        echo "le medecin a un mail";
+                                    }
+                                    else {
+                                        $responseInfo->Email
+                                    }
+
+
+                                    //header('Location:view.dashboard.php?msg=loginOk');    
                                 }
                                 elseif ($secret == 1) 
                                 {
                                     $medecin = getUser($DBCinMedecin, $DBPassword);
                                     session_start();
                                     $_SESSION['medecin']    = $medecin;
-                                    header('Location:form.firstCon.php?msg=firstCon&mail=ok');
+                                    //header('Location:form.firstCon.php?msg=firstCon&mail=ok');
                                 }
                                 else 
                                 {
