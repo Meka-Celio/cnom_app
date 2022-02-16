@@ -48,10 +48,12 @@
                         <th>Montant</th>
                         <th>Date Paiement</th>
                         <th>Heure</th>
+                        <th>#</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <?php if ($oneTransaction->Validation == 1) { ?>
+                        <tr class="txt-green">
                           <td><?php echo $oneTransaction->CIN ?></td>
                           <td><?php echo $oneTransaction->Nom ?></td>
                           <td><?php echo $oneTransaction->Email ?></td>
@@ -60,10 +62,35 @@
                           <td><?php echo $oneTransaction->Montant ?></td>
                           <td><?php echo $oneTransaction->DatePaiement ?></td>
                           <td><?php echo $oneTransaction->HeurePaiement ?></td>
+                          <td><?php echo $oneTransaction->Validation ?></td>
                         </tr>
+                      <?php } else { ?>
+                        <tr class="txt-red">
+                          <td><?php echo $oneTransaction->CIN ?></td>
+                          <td><?php echo $oneTransaction->Nom ?></td>
+                          <td><?php echo $oneTransaction->Email ?></td>
+                          <td><?php echo $oneTransaction->Annee ?></td>
+                          <td><?php echo $oneTransaction->NCommande ?></td>
+                          <td><?php echo $oneTransaction->Montant ?></td>
+                          <td><?php echo $oneTransaction->DatePaiement ?></td>
+                          <td><?php echo $oneTransaction->HeurePaiement ?></td>
+                          <td><?php echo $oneTransaction->Validation ?></td>
+                        </tr>
+                      <?php } ?>
                     </tbody>
                     <tfoot>
-                      <tr><td colspan="8"><a href="admin.view.editTransaction.php?modifyTransaction=on&numTransaction=<?php echo $oneTransaction->NCommande ?>" class="btn btn-warning">Modifier</a></td></tr>
+                      <tr>
+                        <td>
+                          <a href="admin.view.editTransaction.php?modifyTransaction=on&numTransaction=<?php echo $oneTransaction->NCommande ?>" class="btn btn-warning">Modifier</a>
+                        </td>
+                        <td>
+                          <form action="admin.app.controller.php?action=activeT" method="post">
+                            <input type="hidden" name="numCommande" value="<?php echo $oneTransaction->NCommande ?>">
+                            <input type="submit" value="Activer" name="submit" class="btn btn-success">
+                          </form>
+                        </td>
+                        <td colspan="7"></td>
+                      </tr>
                     </tfoot>
                   </table>
                 </div>

@@ -11,11 +11,10 @@
           <section class="wrapper">
            <h3><i class="fa fa-angle-right"></i> Situation des cotisations</h3>
             <?php if (isset($msg)) { include('_utils.php'); } ?>
-
-            
-
-              <!-- INFORMATIONS USER -->
-              <div class="row mt col-md-4">
+              
+              <div class="container">
+                <!-- INFORMATIONS USER -->
+                <div class="row mt col-md-4">
                   <div class="col-md-12">
                       <div class="showback">
                           <h4 class="mb"><i class="fa fa-angle-right"></i> Mes Informations</h4>
@@ -51,62 +50,89 @@
                           </div>
                       </div>
                   </div>
-              </div>
+                </div>
 
-            <!-- Mes cotisations payées -->
-              <div class="row mt col-md-8">
-                  <div class="cotisation-panel">
-                      <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-                            <h4><i class="fa fa-angle-right"></i> Cotisations Payées</h4>
-                            <hr>
-                              <thead>
-                                <tr>
-                                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Années</th>
-                                    <th><i class="fa fa-bookmark"></i> Montants</th>
-                                    <th><i class=" fa fa-edit"></i> Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php if (isset($yearListPaid->AnneeVM)) { ?>
+                <!-- Mes cotisations payées -->
+                <div class="row mt col-md-8">
+                    <div class="cotisation-panel">
+                        <div class="content-panel">
+                            <table class="table table-striped table-advance table-hover">
+                              <h4><i class="fa fa-angle-right"></i> Cotisations Payées</h4>
+                              <hr>
+                                <thead>
+                                  <tr>
+                                      <th class="hidden-phone"><i class="fa fa-question-circle"></i> Années</th>
+                                      <th><i class="fa fa-bookmark"></i> Montants</th>
+                                      <th><i class=" fa fa-edit"></i> Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php if (isset($yearListPaid->AnneeVM)) { ?>
 
-                                    <?php $AnneeVMPaid = $yearListPaid->AnneeVM;
-                                    if (is_array($AnneeVMPaid)) { ?>
-                                      <?php for($i=0; $i<count($AnneeVMPaid); $i++) { ?>
+                                      <?php $AnneeVMPaid = $yearListPaid->AnneeVM;
+                                      if (is_array($AnneeVMPaid)) { ?>
+                                        <?php for($i=0; $i<count($AnneeVMPaid); $i++) { ?>
 
+                                          <tr>
+                                            <td><?= $AnneeVMPaid[$i]->Annee ?></td>
+                                            <td><?= $AnneeVMPaid[$i]->AnneeMontant ?></td>
+                                            <td><p class="label label-success">Payée</p></td>
+                                          </tr>
+
+                                        <?php } ?>
+                                        <!-- Si ne comporte qu'une seule ligne -->
+                                      <?php } else { ?>
+                                        
                                         <tr>
-                                          <td><?= $AnneeVMPaid[$i]->Annee ?></td>
-                                          <td><?= $AnneeVMPaid[$i]->AnneeMontant ?></td>
-                                          <td><p class="label label-success">Payée</p></td>
+                                          <td><?= $AnneeVMPaid->Annee ?></td>
+                                          <td><?= $AnneeVMPaid->AnneeMontant ?></td>
+                                          <td><p class="label label-success"><b>Payée</b></p></td>
                                         </tr>
 
-                                      <?php } ?>
-                                      <!-- Si ne comporte qu'une seule ligne -->
-                                    <?php } else { ?>
-                                      
+                                    <?php } } else { ?>
                                       <tr>
-                                        <td><?= $AnneeVMPaid->Annee ?></td>
-                                        <td><?= $AnneeVMPaid->AnneeMontant ?></td>
-                                        <td><p class="label label-success"><b>Payée</b></p></td>
+                                        <td class="bg-danger" colspan="3">Aucune cotisation n'est payée !</td>
                                       </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div><!-- /content-panel -->
+                    </div><!-- /col-md-12 -->
+                </div><!-- /row -->
+              </div>
 
-                                  <?php } } else { ?>
-                                    <tr>
-                                      <td class="bg-danger" colspan="3">Aucune cotisation n'est payée !</td>
-                                    </tr>
-                                  <?php } ?>
-                              </tbody>
-                          </table>
-                      </div><!-- /content-panel -->
-                  </div><!-- /col-md-12 -->
-              </div><!-- /row -->
-
-              <!-- INFORMATIONS USER -->
-              <!-- <div class="row mt col-md-4">
-                  <div class="col-md-12">
-                      
+              <div class="container">
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container row mt col-md-4">
+                  <div class="option">
+                    <a href="#">
+                      <img src="" alt="">
+                      <p>Mes Impayées</p>
+                    </a>
                   </div>
-              </div> -->
+                </div>
+
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container row mt col-md-4">
+                <div class="option">
+                    <a href="#">
+                      <img src="" alt="">
+                      <p>Mon Historique</p>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container row mt col-md-4">
+                <div class="option">
+                    <a href="#">
+                      <img src="" alt="">
+                      <p>Mon Ptofil</p>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
 
       </section><! --/wrapper -->
   </section>

@@ -253,9 +253,23 @@
                 })();
                 break; 
 
+            case 'activeT':
+                (function () {
+                    $NCommande = $_POST['numCommande'];
+                    $activeT = activeTransaction($NCommande);
+                    if ($activeT) {
+                        header("Location:admin.view.oneTransaction.php?showTransaction=on&numTransaction=$NCommande&msg=activeSuccess");
+                    }
+                    else {
+                        header("Location:admin.view.oneTransaction.php?showTransaction=on&numTransaction=$NCommande&msg=activeFail");
+                    }
+                })();
+                break;
+
             default:break;
         }
     }
     else {
         header('Location:form.login.php?msg=403');
     }
+

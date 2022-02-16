@@ -241,11 +241,12 @@
                                         echo "le medecin a un mail";
                                     }
                                     else {
-                                        $responseInfo->Email
+                                        if (preg_match($pattern, $responseInfo->Email)) {
+                                            echo "le medecin a un mail";
+                                        }
                                     }
 
-
-                                    //header('Location:view.dashboard.php?msg=loginOk');    
+                                    header('Location:view.dashboard.php?msg=loginOk');    
                                 }
                                 elseif ($secret == 1) 
                                 {
@@ -360,7 +361,6 @@
                                     header("Location:API_PHP/index.php");
                                 }
                                 else {
-                                    var_dump($addTransaction);
                                     echo "<br> Une erreur est survenue, merci de contacter le support";
                                 } 
                             } else {

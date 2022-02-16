@@ -269,3 +269,11 @@ PARTIE ADMIN*
 {
     padding: 5px;
 }
+
+.txt-green td {
+    color: green;
+}
+
+.txt-red td {
+    color: red;
+}

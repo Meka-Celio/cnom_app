@@ -519,3 +519,26 @@
             echo "Erreur lors de l'execution de la requête : ".$e->getMessage();
         }
     }
+
+
+    function activeTransaction ($NCommande) {
+        try 
+        {
+            $con = databaseConnexion();
+            $sql = "UPDATE paiements SET 
+            Validation = 1
+            WHERE NCommande = '$NCommande'";
+            // Si success
+            if ($res = $con->query($sql)) {
+                $action = 1;
+            } 
+            else {
+                $action = 0;
+            }
+            return $action;
+        }
+        catch (PDOException $e) 
+        {
+            echo "La requete a échouée, la transaction n'est pas activée ! ".$e->getMessage();
+        }
+    }

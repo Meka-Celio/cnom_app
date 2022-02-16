@@ -32,37 +32,48 @@
             <div class="row mt col-md-12">
               <div class="cotisation-panel">
                 <div class="content-panel">
-                  <table class="table table-striped table-advance table-hover">
+                  <table class="table table-striped table-advance table-hover" id="tab-transaction">
                     <thead>
                       <tr>
+                        <th>#</th>
                         <th>CIN</th>
                         <th>Nom</th>
-                        <th>N° Transaction</th>
-                        <th>N° Autorisation</th>
                         <th>N° Commande</th>
                         <th>Montant</th>
                         <th>Années Payées</th>
                         <th>Date Paiement</th>
                         <th>Heure</th>
-                        <th>#</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($transactions as $ligne) { ?>
-                        <tr>
-                          <td><?php echo $ligne->CIN ?></td>
-                          <td><?php echo $ligne->Nom ?></td>
-                          <td><?php echo $ligne->NTransaction ?></td>
-                          <td><?php echo $ligne->NAutorisation ?></td>
-                          <td><?php echo $ligne->NCommande ?></td>
-                          <td><?php echo $ligne->Montant ?></td>
-                          <td><?php echo $ligne->Annee ?></td>
-                          <td><?php echo $ligne->DatePaiement ?></td>
-                          <td><?php echo $ligne->HeurePaiement ?></td>
+                        <?php if ($ligne->Validation == 1) { ?>
+                          <tr>
                           <td>
-                            <a href="admin.view.oneTransaction.php?showTransaction=on&numTransaction=<?php echo $ligne->NCommande ?>" class="btn btn-xs btn-primary">Voir</a>
-                          </td>
-                        </tr>
+                              <a href="admin.view.oneTransaction.php?showTransaction=on&numTransaction=<?php echo $ligne->NCommande ?>" class="btn btn-xs btn-success">Voir</a>
+                            </td>
+                            <td><?php echo $ligne->CIN ?></td>
+                            <td><?php echo $ligne->Nom ?></td>
+                            <td><?php echo $ligne->NCommande ?></td>
+                            <td><?php echo $ligne->Montant ?></td>
+                            <td class="anneePaid"><?php echo $ligne->Annee ?></td>
+                            <td><?php echo $ligne->DatePaiement ?></td>
+                            <td><?php echo $ligne->HeurePaiement ?></td>
+                          </tr>
+                        <?php } else { ?>
+                          <tr>
+                          <td>
+                              <a href="admin.view.oneTransaction.php?showTransaction=on&numTransaction=<?php echo $ligne->NCommande ?>" class="btn btn-xs btn-danger">Voir</a>
+                            </td>
+                            <td><?php echo $ligne->CIN ?></td>
+                            <td><?php echo $ligne->Nom ?></td>
+                            <td><?php echo $ligne->NCommande ?></td>
+                            <td><?php echo $ligne->Montant ?></td>
+                            <td class="anneePaid"><?php echo $ligne->Annee ?></td>
+                            <td><?php echo $ligne->DatePaiement ?></td>
+                            <td><?php echo $ligne->HeurePaiement ?></td>
+                          </tr>
+                        <?php } ?>
                       <?php } ?>
                     </tbody>
                   </table>
