@@ -224,6 +224,24 @@
         }
     }
 
+    function updateRegionProvince ($CINMedecin, $region, $province) {
+        try {
+            $con = databaseConnexion();
+            $sql = "UPDATE medecin SET 
+            NomProvince = '$province', 
+            NomRegion = '$region' WHERE CINMedecin='$CINMedecin'";
+            if ($res = $con->query($sql)) {
+                $action = 1;
+            } else {
+                $action = 0;
+            }
+            return $action;
+        }
+        catch(PDOException $e) {
+            echo "Erreur lors de l'execution de la requête : ".$e->getMessage();
+        }
+    }
+
     function updateEmail ($CINMedecin, $email) {
         try {
             $con = databaseConnexion();

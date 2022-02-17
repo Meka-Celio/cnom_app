@@ -6,6 +6,45 @@
 
   if (isset($_SESSION['medecin'])) {
     $medecin = $_SESSION['medecin'];
+
+    // Mise à jour information médecin
+    $cin = $medecin->CINMedecin;
+    $DBtelephone = $medecin->Telephone;
+    $DBemail = $medecin->Email;
+    $DBregion = $medecin->NomRegion;
+    $DBprovince = $medecin->NomProvince;
+ 
+    $GetInfoMedecin = getInfoMedecin($cin);
+    $response = $GetInfoMedecin->GetInfoMedecinAvecAuthResult;
+
+    // Informations récdupéré du webservice
+    $wemail = $response->Email;
+    $wtelephone = $response->TelephoneMobile;
+    $wregion = $response->LibelleRegion;
+    $wprovince = $response->LibelleProvince;
+    
+    $wsecteurMedecin = $response->SecteurMedecin;
+    $wspecialite = $response->SpecialiteMedecin;
+    $wdateDiplome = $response->DateDiplome;
+    $wdateRecrutement = $response->DateRecrutement_Installation;
+    $wadresse = $response->AdressePro;
+
+    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
+
+    if (preg_match($pattern, $DBemail)) {
+      $email = $DBemail;
+      $has_mail = 1;
+    } else {
+      if (preg_match($pattern, $wemail)) {
+        $email = $wemail;
+        $has_mail = 1;
+      }
+      else {
+        $email = "";
+        $has_mail = 0;
+      }
+    }
+
   } else {
     header('Location:form.login.php?msg=user_404');
   }
@@ -41,6 +80,7 @@
   }
 
   $cache = false;
+
 
 ?>
 
@@ -110,5 +150,12 @@
             </div>
 
             <div class="notif">
-        <p class="alert alert-info">Le service prendra fin à 23H</p>
-      </div>
+              <p class="alert alert-info">Le service prendra fin à 23H</p>
+            </div>
+
+            <!-- Si il n'y a pas de mail -->
+            <?php if ($has_mail == 0) { ?>
+              <p class="text-danger hasNoMail">
+                Vous n'avez pas d'email, merci d'allez dans la section profil pour configurer votre email
+              </p>
+            <?php } ?>

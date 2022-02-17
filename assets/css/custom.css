@@ -167,6 +167,12 @@ Mes Classes
     font-size: 18px;
 }
 
+.hasNoMail {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
 /* ---------------------------------------------------
 FORMULAIRE EXTERIEURS
 ------------------------------------------------------ */
