@@ -9,7 +9,7 @@
 
       <section id="main-content">
           <section class="wrapper">
-           <h3><i class="fa fa-angle-right"></i> Situation des cotisations</h3>
+           <h3><i class="fa fa-angle-right"></i> Ma situation sur mes cotisations</h3>
             <?php if (isset($msg)) { include('_utils.php'); } ?>
               
               <div class="container">
@@ -99,39 +99,6 @@
                         </div><!-- /content-panel -->
                     </div><!-- /col-md-12 -->
                 </div><!-- /row -->
-              </div>
-
-              <div class="container">
-                <!-- OPTIONS DASHBOARD -->
-                <div class="option-container row mt col-md-4">
-                  <div class="option">
-                    <a href="#">
-                      <img src="" alt="">
-                      <p>Mes Impayées</p>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- OPTIONS DASHBOARD -->
-                <div class="option-container row mt col-md-4">
-                <div class="option">
-                    <a href="#">
-                      <img src="" alt="">
-                      <p>Mon Historique</p>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- OPTIONS DASHBOARD -->
-                <div class="option-container row mt col-md-4">
-                <div class="option">
-                    <a href="#">
-                      <img src="" alt="">
-                      <p>Mon Ptofil</p>
-                    </a>
-                  </div>
-                </div>
-
               </div>
 
       </section><! --/wrapper -->

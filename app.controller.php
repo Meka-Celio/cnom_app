@@ -235,17 +235,6 @@
                                     // Validation du mail 
                                     // Si le medecin a un mail dans la base de données
                                     $DBEmail = $medecin->Email;
-                                    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
-
-                                    if (preg_match($pattern, $DBEmail)) {
-                                        echo "le medecin a un mail";
-                                    }
-                                    else {
-                                        if (preg_match($pattern, $responseInfo->Email)) {
-                                            echo "le medecin a un mail";
-                                        }
-                                    }
-
                                     header('Location:view.dashboard.php?msg=loginOk');    
                                 }
                                 elseif ($secret == 1) 
@@ -253,7 +242,7 @@
                                     $medecin = getUser($DBCinMedecin, $DBPassword);
                                     session_start();
                                     $_SESSION['medecin']    = $medecin;
-                                    //header('Location:form.firstCon.php?msg=firstCon&mail=ok');
+                                    header('Location:form.firstCon.php?msg=firstCon&mail=ok');
                                 }
                                 else 
                                 {
@@ -293,76 +282,85 @@
                                 session_start();
                                 $_SESSION['user'] = $user;
 
-                                function genererChaineAleatoire($longueur = 6)
-                                {
-                                    $caracteres = '0123456789';
-                                    $longueurMax = strlen($caracteres);
-                                    $chaineAleatoire = '';
-                                    for ($i = 0; $i < $longueur; $i++)
+                                $valideMail = valideMail($user->Email);
+
+                                if ($valideMail) {
+
+                                    function genererChaineAleatoire($longueur = 6)
                                     {
-                                    $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+                                        $caracteres = '0123456789';
+                                        $longueurMax = strlen($caracteres);
+                                        $chaineAleatoire = '';
+                                        for ($i = 0; $i < $longueur; $i++)
+                                        {
+                                        $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+                                        }
+                                        return $chaineAleatoire;
                                     }
-                                    return $chaineAleatoire;
-                                }
-                                
-                                $frais = number_format(($montant/98.68)*100*0.0136,2);
-                                $montantPaid = $frais + $montant;
-                                $montantAff = $montant;
+                                    
+                                    $frais = number_format(($montant/98.68)*100*0.0136,2);
+                                    $montantPaid = $frais + $montant;
+                                    $montantAff = $montant;
 
 
-                                // Trouver le code de region
-                                if ($user->NomRegion == 'Casablanca- Settat')
-                                {
-                                    $nRegion = 'Casablanca - Settat';
+                                    // Trouver le code de region
+                                    if ($user->NomRegion == 'Casablanca- Settat')
+                                    {
+                                        $nRegion = 'Casablanca - Settat';
+                                    }
+                                    else 
+                                    {
+                                        $nRegion = $user->NomRegion;
+                                    }
+
+                                    $oneRegion = getOneRegion($nRegion);
+                                    $number = genererChaineAleatoire(); 
+
+                                    // W + Code region + int(6) + yearDay + H
+                                    $id_commande = 'W'. $oneRegion->Code_Reg .$number. date('zH');
+
+                                    $CIN                =   $user->CINMedecin;     
+                                    $Nom                =   $user->Nom_Medecin;
+                                    $Email              =   $user->Email;
+                                    $Tel                =   'null';
+                                    $NTransaction       =   'null';
+                                    $NAutorisation      =   'null'; 
+                                    $NCommande          =   $id_commande;
+                                    $NCarte             =   'null';
+                                    $Prix               =   $montantPaid;
+                                    $DatePaiement       =   date('Y-m-d'); 
+                                    $HeurePaiement      =   date('H:i');
+                                    $Annee              =   implode(',', $years); 
+                                    $dateE              =   date('Y-m-d');
+
+                                    $_SESSION['cotisation'] = (object) array(
+                                        'NTransaction'      =>  $NTransaction,
+                                        'NAutorisation'     =>  $NAutorisation,
+                                        'NCommande'         =>  $NCommande,
+                                        'NCarte'            =>  $NCarte,
+                                        'Montant'           =>  $montant,
+                                        'MontantAff'        =>  $montantAff,
+                                        'DatePaiement'      =>  $DatePaiement,
+                                        'HeurePaiement'     =>  $HeurePaiement,
+                                        'Annees'            =>  $years,
+                                        'DateE'             =>  $dateE
+                                    );
+
+                                    $Nom = str_replace('\'', '', $Nom);
+
+                                    $addTransaction = addTransaction($CIN, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Prix, $DatePaiement, $HeurePaiement, $Annee, $dateE);
+
+                                    if ($addTransaction) {
+                                        header("Location:API_PHP/index.php");
+                                    }
+                                    else {
+                                        echo "<br> Une erreur est survenue, merci de contacter le support";
+                                    } 
                                 }
                                 else 
                                 {
-                                    $nRegion = $user->NomRegion;
+                                    header('Location:view.noPaid.php?msg=bad_mail');
                                 }
-
-                                $oneRegion = getOneRegion($nRegion);
-                                $number = genererChaineAleatoire(); 
-
-                                // W + Code region + int(6) + yearDay + H
-                                $id_commande = 'W'. $oneRegion->Code_Reg .$number. date('zH');
-
-                                $CIN                =   $user->CINMedecin;     
-                                $Nom                =   $user->Nom_Medecin;
-                                $Email              =   $user->Email;
-                                $Tel                =   'null';
-                                $NTransaction       =   'null';
-                                $NAutorisation      =   'null'; 
-                                $NCommande          =   $id_commande;
-                                $NCarte             =   'null';
-                                $Prix               =   $montantPaid;
-                                $DatePaiement       =   date('Y-m-d'); 
-                                $HeurePaiement      =   date('H:i');
-                                $Annee              =   implode(',', $years); 
-                                $dateE              =   date('Y-m-d');
-
-                                $_SESSION['cotisation'] = (object) array(
-                                    'NTransaction'      =>  $NTransaction,
-                                    'NAutorisation'     =>  $NAutorisation,
-                                    'NCommande'         =>  $NCommande,
-                                    'NCarte'            =>  $NCarte,
-                                    'Montant'           =>  $montant,
-                                    'MontantAff'        =>  $montantAff,
-                                    'DatePaiement'      =>  $DatePaiement,
-                                    'HeurePaiement'     =>  $HeurePaiement,
-                                    'Annees'            =>  $years,
-                                    'DateE'             =>  $dateE
-                                );
-
-                                $Nom = str_replace('\'', '', $Nom);
-
-                                $addTransaction = addTransaction($CIN, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Prix, $DatePaiement, $HeurePaiement, $Annee, $dateE);
-
-                                if ($addTransaction) {
-                                    header("Location:API_PHP/index.php");
-                                }
-                                else {
-                                    echo "<br> Une erreur est survenue, merci de contacter le support";
-                                } 
                             } else {
                                 echo "pas de user recupérer";
                             }

@@ -138,20 +138,65 @@
         </header>
       <!--header end-->
 
-      <div class="nav" id="top_menu">
-                <!--  top menu -->
-                <ul class="nav top-menu">
-                  <li clas="nav-item-notify"><a href="view.dashboard.php">Tableau de bord</a></li>
-                  <li clas="nav-item-notify"><a href="view.noPaid.php" class="btn btn-danger">Impayées</a></li>
-                  <li clas="nav-item-notify"><a href="view.paid.php">Historique</a></li>
-                  <li clas="nav-item-notify"><a href="view.user.php">Mon Profil</a></li>
-                  <li clas="nav-item-notify"><a href="app.logout.php?msg=exit">Retour sur cnom.ma</a></li>
-                </ul>
-            </div>
+       <!--  top menu -->
+       <!-- <div class="nav" id="top_menu">
+         <ul class="nav top-menu">
+           <li clas="nav-item-notify"><a href="view.dashboard.php">Tableau de bord</a></li>
+           <li clas="nav-item-notify"><a href="view.noPaid.php" class="btn btn-danger">Impayées</a></li>
+           <li clas="nav-item-notify"><a href="view.paid.php">Historique</a></li>
+           <li clas="nav-item-notify"><a href="view.user.php">Mon Profil</a></li>
+           <li clas="nav-item-notify"><a href="app.logout.php?msg=exit">Retour sur cnom.ma</a></li>
+          </ul>
+        </div>  -->
+        <div class="top-separateur"></div>
 
-            <div class="notif">
-              <p class="alert alert-info">Le service prendra fin à 23H</p>
-            </div>
+        <div class="notif">
+          <p class="alert alert-info">Le service prendra fin à 23H</p>
+        </div>
+
+            <div class="container nav-option">
+
+              <!-- OPTIONS DASHBOARD -->
+              <div class="option-container">
+                <div class="option">
+                    <a href="view.dashboard.php">
+                      <img src="assets/img/home.png" alt="">
+                      <p>Accueil</p>
+                    </a>
+                  </div>
+                </div>
+
+
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container">
+                  <div class="option">
+                    <a href="view.noPaid.php">
+                      <img src="assets/img/bill.png" alt="">
+                      <p>Mes Impayées</p>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container">
+                <div class="option">
+                    <a href="view.user.php">
+                      <img src="assets/img/user.png" alt="">
+                      <p>Mon Profil</p>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="option-container">
+                  <div class="option">
+                    <a href="view.faq.php">
+                      <img src="assets/img/faq.png" alt="">
+                      <p>FAQ</p>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
 
             <!-- Si il n'y a pas de mail -->
             <?php if ($has_mail == 0) { ?>

@@ -5,8 +5,7 @@
       <section id="main-content">
           <section class="wrapper">
           	<h3><i class="fa fa-angle-right"></i> Historique des cotisations</h3>
-
-            <?php if (isset($msg_p)) { include('_utils_p.php'); } ?>
+            
             <?php if (isset($msg)) { include('_utils.php'); } ?>
 
             <!-- Mes cotisations payées -->

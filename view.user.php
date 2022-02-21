@@ -11,60 +11,63 @@
             <?php if (isset($msg)) { include('_utils.php'); } ?>
             
             <!-- BASIC FORM ELELEMNTS -->
-            <div class="row mt col-md-6">
+            <div class="row mt col-md-8">
                 <div class="col-lg-12">
                   <div class="form-panel">
-                      <form class="form-horizontal style-form" method="post">
+                      <form id="user-profile-form" class="form-horizontal style-form" method="post">
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">CIN</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">CIN</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->CINMedecin ?></p>
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Nom</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">Nom</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->Nom_Medecin ?></p>
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Téléphone</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">Téléphone</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->Telephone ?></p>
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">E-Mail</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">E-Mail</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->Email ?></p>
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Province</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">Province</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->NomProvince ?></p>
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-lg-2 col-sm-2 control-label">Région</label>
-                              <div class="col-lg-10">
+                              <label class="col-lg-4 col-sm-4 control-label">Région</label>
+                              <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->NomRegion ?></p>
                               </div>
                           </div>
 
                       </form>
+
+                      <!-- Bouton de modification -->
+                      <a href="view.edit.user.php" class="btn btn-warning">Modifier mes informations</a>
                   </div>
                 </div><!-- col-lg-12-->         
             </div><!-- /row -->
             
             <!-- INLINE FORM ELELEMNTS -->
-            <div class="row mt col-lg-6">
+            <div class="row mt col-lg-4">
               <div class="col-lg-12">
                 <div class="form-panel">
                       <h4 class="mb"><i class="fa fa-angle-right"></i> Changer de mot de passe</h4>
