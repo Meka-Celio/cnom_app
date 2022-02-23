@@ -106,7 +106,15 @@ if (isset($_SESSION['RecuPaiement']))
                                 <input type="hidden" name="MontantCotisation" value="<?= $recu->MontantCotisation[$j] ?>">
                                 <input type="hidden" name="Somme" value="<?= $recu->Somme[$j] ?>">
 
-                                <td><input type="submit" name="submit" value="PDF" class="btn btn-primary"></td>
+                                <td>
+                                  <input type="submit" name="submit" value="PDF" class="btn btn-primary">
+                                  <input type="submit" name="submitmail" value="Envoie" class="btn btn-danger">
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td><?php echo $recu->Email ?></td>
+                                <td>00000</td>
                               </tr>
 
                             </form>
@@ -185,7 +193,10 @@ if (isset($_SESSION['RecuPaiement']))
                                 <input type="hidden" name="MontantCotisation" value="<?= $recu->MontantCotisation ?>">
                                 <input type="hidden" name="Somme" value="<?= $recu->Somme ?>">
 
-                              <td><input type="submit" name="submit" value="PDF" class="btn btn-primary"></td>
+                              <td>
+                                <input type="submit" name="submit" value="PDF" class="btn btn-primary">
+                                <input type="submit" name="submitmail" value="Envoie" class="btn btn-danger">
+                              </td>
                             </tr>
 
                           </form>

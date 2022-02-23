@@ -14,55 +14,62 @@
             <div class="row mt col-md-8">
                 <div class="col-lg-12">
                   <div class="form-panel">
-                      <form id="user-profile-form" class="form-horizontal style-form" method="post">
+                    <form id="user-profile-form" class="form-horizontal style-form" method="post">
+                  
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">CIN</label>
                               <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->CINMedecin ?></p>
                               </div>
-                          </div>
+                        </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">Nom</label>
                               <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->Nom_Medecin ?></p>
                               </div>
-                          </div>
+                        </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">Téléphone</label>
-                              <div class="col-lg-8">
+                              <div class="col-lg-6">
                                 <input type="text" name="telephone" id="" class="form-control" placeholder="Telephone">
                                 <sub>Format : 0600000000</sub>
                               </div>
-                          </div>
+                              <div class="col-lg-2">
+                                  <input type="submit" value="O" class="btn btn-success" name="telSubmit">
+                              </div>
+                        </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">E-Mail</label>
-                              <div class="col-lg-8">
+                              <div class="col-lg-6">
                                   <input type="text" name="email" id="" class="form-control" placeholder="E-Mail">
                               </div>
-                          </div>
+                              <div class="col-lg-2">
+                                <input type="submit" value="O" class="btn btn-success" name="emailSubmit">
+                              </div>
+                        </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">Province</label>
-                              <div class="col-lg-8">
+                              <div class="col-lg-6">
                                   <p class="form-control-static"><?php echo $medecin->NomProvince ?></p>
                               </div>
-                          </div>
+                        </div>
 
-                          <div class="form-group">
+                        <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">Région</label>
                               <div class="col-lg-8">
                                   <p class="form-control-static"><?php echo $medecin->NomRegion ?></p>
                               </div>
-                          </div>
+                        </div>
+                        
+                        <a href="view.edit.user.php" class="btn btn-info">Terminer les modifications</a>
 
-                      </form>
-
-                      <!-- Bouton de modification -->
-                      <a href="#" class="btn btn-success">Valider</a>
+                    </form>
+                          
                   </div>
                 </div><!-- col-lg-12-->         
             </div><!-- /row -->

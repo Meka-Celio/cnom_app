@@ -174,8 +174,7 @@
                             // Si non valide
                             if ($log == 0) 
                             {
-                                // header('Location:form.login.php?msg=noExistCIN');
-                                echo "Aucun medecin n'a cette CIN";
+                                header('Location:form.login.php?msg=noExistCIN');
                             }
                             // Si le medecin existe dans le webservice mais pas dans labase de données
                             elseif ($log == 1) 

@@ -27,6 +27,9 @@
     <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
+    <!-- Import FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/35e918c145.js" crossorigin="anonymous"></script>
+
 	<script>
         $("html").html()
     </script>

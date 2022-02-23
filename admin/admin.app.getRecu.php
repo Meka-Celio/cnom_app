@@ -18,6 +18,10 @@
 
   			// Appel à la fonction pour recupération info médecin
 		  	$response = getInfoMedecin($CIN);
+
+			// Appel a la fonction getMedecin pour recuperer le mail du medecin
+			$DBMedecin = getUserByCIN($CIN);
+			$mail = $DBMedecin->Email;
 		  
 			// Recuperation medecin
 			$medecin = $response->GetInfoMedecinAvecAuthResult;
@@ -117,7 +121,8 @@
 	  			'DateCreation'					=>	$recu_DateCreation,
 	  			'AnneePayee'					=>	$recu_AnneeCotisation,
 	  			'MontantCotisation'				=>	$recu_MontantCotisation,
-	  			'Somme'							=>	$recu_Somme
+	  			'Somme'							=>	$recu_Somme,
+				'Email'							=>	$mail
 	  		);
 
 

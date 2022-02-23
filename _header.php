@@ -104,7 +104,7 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
 
     <!-- Filtre -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -115,6 +115,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
+
+    <script src="https://kit.fontawesome.com/35e918c145.js" crossorigin="anonymous"></script>
 
   </head>
 
