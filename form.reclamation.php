@@ -41,6 +41,8 @@
               <h2 class="form-login-heading">Réclamation</h2>
               <div class="row">
                 <div class="login-wrap">
+                  <p class="form-detail">Remplir le formulaire de déclaration de non-existence sur le système</p><br>
+
                   <p><b>CIN :</b> <br> <?= $postCIN ?></p>
                   <p><b>Nom & Prénom :</b> <br> <?= $postNom ?></p>
                   <p><b>Email :</b> <br> <?= $postMail ?></p>
@@ -80,6 +82,7 @@
             <h2 class="form-login-heading">Réclamation</h2>
             <div class="row">
               <div class="login-wrap">
+              <p class="form-detail">Remplir le formulaire de déclaration de non-existence sur le système</p><br>
                 <label for="">CIN * </label>
                 <input type="text" name="CINMedecin" class="form-control" placeholder="CIN" autofocus required>
                 <br>

@@ -22,6 +22,9 @@
 		        <h2 class="form-login-heading">Espace COTISATION</h2>
 		        <div class="row">
 							<div class="login-wrap">
+								<p class="form-detail">Pour accéder à votre situation vous devez vous connecter à votre compte</p>
+								<br>
+								
 								<label for=""><b>CIN *</b></label>
 								<input type="text" name="CINMedecin" class="form-control" placeholder="CIN" autofocus required data-type="string">
 								<br>

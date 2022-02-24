@@ -31,6 +31,7 @@
 		        <h2 class="form-login-heading">Reinitialiser <br>mon mot de passe</h2>
 		        <div class="row">
 							<div class="login-wrap">
+							<p class="form-detail">Réinitialiser votre mot de passe</p><br>
 								<label for="">Renseigner votre CIN</label>
 								<input type="text" name="CINMedecin" placeholder="CIN" class="form-control" required>
 								<br>

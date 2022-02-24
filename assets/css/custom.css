@@ -234,33 +234,18 @@ Mes Classes
 /* ---------------------------------------------------
 FORMULAIRE EXTERIEURS
 ------------------------------------------------------ */
-#register-page .container.flex-center {
-    align-items: initial;
+.head-form {
+   margin: 10px auto;
 }
 
-.form-register {
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    padding:0;
+.form-login {
+    margin: 15px auto 0;
 }
 
-.form-register h2.form-register-heading {
-    margin: 0;
-    padding: 25px 20px;
+.form-detail {
+    font-size: 18px;
     text-align: center;
-    background: #68dff0;
-    border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;
-    color: #fff;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: 300;
-}
-
-#register-page .login-wrap {
-    background-color: #fff;
+    font-weight: 600;
 }
 
 .btn-support {

@@ -26,14 +26,13 @@
 
 	<div id="login-page">
 		<div class="container">
-			
-			<div class="notification">
-				<?php if (isset($msg)) { require '_utils.php'; } ?>
-	  		</div>
 		    <form class="form-login" action="app.controller.php?action=updatePasswordFirstCon" method="POST" id="formulaire">
 		    	<h2 class="form-login-heading">Première connexion</h2>
 		        <div class="row">
 					<div class="login-wrap">
+						<p class="form-detail">Renseignez votre email et changer de mot de passe</p>
+						<br>
+
 						<input type="hidden" name="CINMedecin" value="<?php echo $medecin->CINMedecin ?>">
 						<label for="">Email* :</label>
 						<input type="email" name="Email" class="form-control" placeholder="Email" required data-type="string">

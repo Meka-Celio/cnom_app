@@ -26,12 +26,22 @@
   </head>
 
   <body>
-      <div class="notification">
-          <?php if (isset($msg)) { require '_utils.php'; } ?>
-      </div>
 
       <header>
-          <div class="head-page"></div>
+          <div class="head-form">
+              <div class="container">
+                <div class="notification">
+                  <?php if (isset($msg)) { require '_utils.php'; } ?>
+                </div>
+                <div class="branding">
+                    <img src="assets/img/logo-cnom.png" alt="logo cnom">
+                </div>
+                <div class="title">
+                    <h1>Bienvenue sur Espace Cotisation</h1>
+                    <p class="subtitle">Portail de paiement en ligne des cotisations CNOM</p>
+                </div>
+              </div>
+          </div>
       </header>
 
       
