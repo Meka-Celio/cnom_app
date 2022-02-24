@@ -12,7 +12,8 @@
     <?php } else if ($msg == 'noExistCIN') { ?>
         <div class="alert alert-danger alert-banner" role="alert">
             Nous ne parvenons pas à retrouver cette CIN sur le système. <br>
-            Merci de vous rapprocher de votre <b>CROM</b> pour vérification.
+            <b>Evitez les espaces sur la CIN.</b> <br>
+            Vérifiez que votre CIN soit correctement écrite
         </div>
 
     <?php } else if ($msg == 'user_404') { ?>

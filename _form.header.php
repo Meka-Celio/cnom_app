@@ -34,7 +34,7 @@
                   <?php if (isset($msg)) { require '_utils.php'; } ?>
                 </div>
                 <div class="branding">
-                    <img src="assets/img/logo-cnom.png" alt="logo cnom">
+                    <img src="assets/img/logo.jpeg" alt="logo cnom">
                 </div>
                 <div class="title">
                     <h1>Bienvenue sur Espace Cotisation</h1>

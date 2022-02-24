@@ -3,6 +3,26 @@
   require 'app.soapClient.php';
   require 'model.collection.php';
 
+  function verifyEmail ($databaseEmail, $webserviceEmail) {
+    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
+
+    if (preg_match($pattern, $databaseEmail)) {
+      $email = $databaseEmail;
+      $has_mail = 1;
+    } 
+    else 
+    {
+      if (preg_match($pattern, $webserviceEmail)) {
+        $email = $webserviceEmail;
+        $has_mail = 1;
+      }
+      else {
+        $email = "";
+        $has_mail = 0;
+      }
+    }
+    return [$has_mail, $email];
+  }
 
   if (isset($_SESSION['medecin'])) {
     $medecin = $_SESSION['medecin'];
@@ -29,23 +49,32 @@
     $wdateRecrutement = $response->DateRecrutement_Installation;
     $wadresse = $response->AdressePro;
 
-    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
+    $verifMail = null;
 
-    if (preg_match($pattern, $DBemail)) {
-      $email = $DBemail;
-      $has_mail = 1;
-    } else {
-      if (preg_match($pattern, $wemail)) {
-        $email = $wemail;
-        $has_mail = 1;
-      }
-      else {
-        $email = "";
-        $has_mail = 0;
-      }
+    $has_mail = "";
+    $email = "";
+
+    if (isset($_GET['maj'])) {
+      $maj = $_GET['maj'];
+
+      $verifMail = verifyEmail($DBemail, $wemail);
+
+      $has_mail = $verifMail[0];
+      $email = $verifMail[1];
+
     }
+    else 
+    {
+      $verifMail = verifyEmail($DBemail, $wemail);
 
-  } else {
+      $has_mail = $verifMail[0];
+      $email = $verifMail[1];
+
+    }
+    
+
+  } 
+  else {
     header('Location:form.login.php?msg=user_404');
   }
 
@@ -189,14 +218,14 @@
                   </div>
                 </div>
 
-                <div class="option-container">
+                <!-- <div class="option-container">
                   <div class="option">
                     <a href="view.faq.php">
                       <img src="assets/img/faq.png" alt="">
                       <p>FAQ</p>
                     </a>
                   </div>
-                </div>
+                </div> -->
 
               </div>
 
