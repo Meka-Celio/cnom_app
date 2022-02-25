@@ -30,6 +30,8 @@
 	  	</div>
 	</div>
 
+	
+
     <!-- js placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="assets/js/jquery.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>

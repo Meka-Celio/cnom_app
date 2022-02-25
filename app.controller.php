@@ -740,6 +740,12 @@
                 })();
             break;
 
+            case 'userUpdate':
+                (function () {
+                    var_dump($_POST);
+                })();
+                break; 
+
             default:break;
         }
     }

@@ -14,7 +14,7 @@
             <div class="row mt col-md-8">
                 <div class="col-lg-12">
                   <div class="form-panel">
-                    <form id="user-profile-form" class="form-horizontal style-form" method="post">
+                    <form action="app.controller.php?action=userUpdate" id="user-profile-form" class="form-horizontal style-form modif-user-form" method="post">
                   
 
                         <div class="form-group">
@@ -37,18 +37,12 @@
                                 <input type="text" name="telephone" id="" class="form-control" placeholder="Telephone">
                                 <sub>Format : 0600000000</sub>
                               </div>
-                              <div class="col-lg-2">
-                                  <input type="submit" value="O" class="btn btn-success" name="telSubmit">
-                              </div>
                         </div>
 
                         <div class="form-group">
                               <label class="col-lg-4 col-sm-4 control-label">E-Mail</label>
                               <div class="col-lg-6">
                                   <input type="text" name="email" id="" class="form-control" placeholder="E-Mail">
-                              </div>
-                              <div class="col-lg-2">
-                                <input type="submit" value="O" class="btn btn-success" name="emailSubmit">
                               </div>
                         </div>
 
@@ -66,7 +60,7 @@
                               </div>
                         </div>
                         
-                        <a href="view.edit.user.php" class="btn btn-info">Terminer les modifications</a>
+                        <input type="submit" name="userUpdateSubmit" value="Terminer les modifications" class="btn btn-info">
 
                     </form>
                           
