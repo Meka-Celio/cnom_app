@@ -31,10 +31,7 @@ function voirCotisationsPayees ($cin)
 	$cotisationsPayer     = getCotisationPayer($cin);
 	$yearListPaid       =   $cotisationsPayer->GetCotisationPayerAvecAuthResult->MedecinCotisation->listeAnnee;
 	
-	else 
-	{
-		$AnneeVMPaid = 0;
-	}
+	
 	return $yearListPaid;
 }
 

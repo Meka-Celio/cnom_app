@@ -187,6 +187,16 @@
            <b>Nouvel enregistrement détecté !</b> <br>
            Merci de remplir le formulaire pour accéder à votre espace de cotisation.
         </div>
+
+    <?php } else if ($msg == 'no_old_year') { ?>
+        <div class="alert alert-danger alert-banner">
+           <b>Vous devez commencer la régularisation depuis l'année la plus ancienne !</b>
+        </div>
+
+    <?php } else if ($msg == 'no_all_years') { ?>
+        <div class="alert alert-danger alert-banner">
+           <b>Vous ne pouvez régulariser l'année la plus récente sans régulariser les autres !</b> 
+        </div>
     <?php } ?>
 
 

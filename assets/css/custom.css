@@ -1,3 +1,11 @@
+body {
+    color: #0b3d62;
+}
+
+a {
+    color: #68dff0;
+}
+
 /* ---------------------------------------
 Classes existantes
 ---------------------------------------- */
@@ -174,6 +182,83 @@ Mes Classes
     padding: 0 15px;
 }
 
+/* ----------------------------------------------
+PARTIE USER
+------------------------------------------------ */
+
+.user-panel {
+    background-color: #fff;
+    box-shadow: -1px 5px 3px rgba(0, 0, 0, 0.199);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user-info, .user-detail {
+    box-sizing: border-box;
+}
+
+.user-info {
+    width: 30%;
+}
+
+.user-detail {
+    width: 65%;
+}
+
+.user-detail h3 {
+    padding-bottom: 30px;
+}
+
+.user-info-content {
+    padding: 40px 20px 70px 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.user-info-content img {
+    width: 35%;
+    border-radius: 50%;
+}
+
+.user-detail-content label {
+    padding: 10px 0;
+    display: block;
+    border-top: 1px solid #8080804d;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.user-info-content p, .user-detail-content p {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #000;
+}
+
+@media screen and (max-width: 800px) {
+    .user-panel {
+        flex-direction: column;
+    }
+
+    .user-info {
+        width: 70%;
+    }
+
+    .user-detail {
+        width: 100%;
+        padding: 0 15px;
+    }
+}
+
+@media screen and (min-width:300px) and (max-width: 500px) {
+    .user-info {
+        width: 90%;
+    }
+}
+
 #user-profile-form .form-group {
     font-size: 16px;
     font-weight: 700;
@@ -220,13 +305,13 @@ Mes Classes
 
 
 .option a:hover img {
-    border-color:#1a645a;
+    border-color:#0b3d62;
     transition: 1s;
 }
 
 .option a p {
     text-align: center;
-    color: #1a645a;
+    color: #0b3d62;
     font-size: 15px;
     font-weight: 800;
 }

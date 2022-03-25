@@ -108,7 +108,7 @@
     }
   }
 
-  $cache = false;
+$cache = 0;
 
 
 ?>
@@ -181,15 +181,15 @@
         </div>  -->
         <div class="top-separateur"></div>
 
-        <div class="notif">
+        <!-- <div class="notif">
           <p class="alert alert-info">Le service prendra fin à 23H</p>
-        </div>
+        </div> -->
 
             <div class="container nav-option">
 
-              <!-- OPTIONS DASHBOARD -->
-              <div class="option-container">
-                <div class="option">
+                <!-- OPTIONS DASHBOARD -->
+                <div class="option-container">
+                  <div class="option">
                     <a href="view.dashboard.php">
                       <img src="assets/img/home.png" alt="">
                       <p>Accueil</p>
@@ -210,7 +210,7 @@
 
                 <!-- OPTIONS DASHBOARD -->
                 <div class="option-container">
-                <div class="option">
+                  <div class="option">
                     <a href="view.user.php">
                       <img src="assets/img/user.png" alt="">
                       <p>Mon Profil</p>
@@ -218,16 +218,7 @@
                   </div>
                 </div>
 
-                <!-- <div class="option-container">
-                  <div class="option">
-                    <a href="view.faq.php">
-                      <img src="assets/img/faq.png" alt="">
-                      <p>FAQ</p>
-                    </a>
-                  </div>
-                </div> -->
-
-              </div>
+            </div>
 
             <!-- Si il n'y a pas de mail -->
             <?php if ($has_mail == 0) { ?>

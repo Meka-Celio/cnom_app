@@ -39,6 +39,87 @@
     // FONCTION D'ACTIONS
     // ---------------------------------------------
     
+    /**
+	 * Permet de vérifier si la dernière année à payer fait parti 
+	 * des années à payer dans le paiement en cours
+	 * 
+	 * @param string	$CINMedecin			La CIN du médecin qui paie
+	 * @param string	$chaine				Les années à payer sous forme de chaine de caractères
+	 * 
+	 * @var array		$AnneeVM			Tableau contenant les cotisation du médecin
+	 * @var array 		$yearsNotPaid		Tableau qui récupère les annéees
+	 * 
+	 * @var string		$oldOneYear			La plus vielle année à régler
+	 * @var string 		$firstYear			La plus récente année à régler
+	 * @var string 		$stringYears		La chaine de caractères des années
+	 * @var string 		$longueur_chaine	La longueur de la chaine de la plus récente à la plus ancienne année	
+	 * 	
+	 * @return int							Indication renvoyée pour savoir si la vérification est bonne ou pas
+	 */
+
+	function verifCotisation ($CINMedecin, $chaine, $cache) {
+
+		// Récupération des impayees de $CINMedecin
+		$getImpayees = getCotisationNonPayer($CINMedecin);
+
+		// Récupération du tableau des cotisations impayees 
+		$AnneeVM = $getImpayees->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee->AnneeVM;
+
+		// Variables
+		$yearsNotPaid 		= 	[];
+		$oldOneYear 		= 	"";
+		$firstYear			=	"";
+		$stringYears		=	"";
+		$longueur_chaine	=	0;
+
+		if (is_array($AnneeVM)) {
+			// Ajout des années dans le tableau et du dernier element dans la variable $oldOneYear
+			for ($i=0; $i < count($AnneeVM); $i++) {
+				array_push($yearsNotPaid, $AnneeVM[$i]->Annee);
+				$oldOneYear = strval($AnneeVM[$i]->Annee);
+			}
+		}
+		else {
+			array_push($yearsNotPaid, $AnneeVM->Annee);
+		}
+
+		// Attribution de la première année
+		$firstYear	=	strval($yearsNotPaid[0]);
+		
+		// Vérifier que $oldOneYear est dans $chaine
+		if (stristr($chaine, $oldOneYear)) {
+			// vérifier que la premiere annee est dans la chaine
+			if (stristr($chaine, $firstYear))
+			{
+				$stringYears 	= implode(',', $yearsNotPaid);
+				$longueur_chaine = strlen($stringYears);
+
+				if (strlen($chaine) === $longueur_chaine) {
+					return 1;
+				}
+				else {
+					if ($cache) {
+                        return 2;
+                    }
+                    else {
+                        return -1;
+                    }
+				}
+			}
+			else 
+			{
+				return 2;
+			}
+		} 
+		else {
+			if ($cache) {
+                return 2;
+            }
+            else {
+                return 0;
+            }
+		}
+	}
 
     /************************************************
      * MAIN
@@ -53,13 +134,6 @@
                 /*----------------------------------------
                 Si nouvel enregistrement
                 ------------------------------------------*/
-                /*array(5) { 
-                ["CINMedecin"]=> string(7) "l305234" 
-                ["Nom_Medecin"]=> string(14) "Dr Daoud Nadia" 
-                ["Telephone"]=> string(10) "0660401225" 
-                ["Region"]=> string(19) "Casablanca - Settat" 
-                ["ID_Province"]=> string(2) "38" } */
-
                 // Si présence de formulaire
                 (function ()
                 {
@@ -265,6 +339,13 @@
 
                         $montant = 0;
 
+                        // Si le cache == 0, cache inactif
+                        if ($_POST['cache'] == 0) {
+                            $cache = 0;
+                        } else {
+                            $cache = 1;
+                        }
+
                         // SI le medecin a plusieurs impayées
                         if (is_array($_POST['NotPaid'])) {
                             $years = $_POST['NotPaid'];
@@ -301,22 +382,10 @@
                                     $montantPaid = $frais + $montant;
                                     $montantAff = $montant;
 
-
-                                    // Trouver le code de region
-                                    if ($user->NomRegion == 'Casablanca- Settat')
-                                    {
-                                        $nRegion = 'Casablanca - Settat';
-                                    }
-                                    else 
-                                    {
-                                        $nRegion = $user->NomRegion;
-                                    }
-
-                                    $oneRegion = getOneRegion($nRegion);
                                     $number = genererChaineAleatoire(); 
 
                                     // W + Code region + int(6) + yearDay + H
-                                    $id_commande = 'W'. $oneRegion->Code_Reg .$number. date('zH');
+                                    $id_commande = 'W'. $user->CINMedecin .$number. date('zH');
 
                                     $CIN                =   $user->CINMedecin;     
                                     $Nom                =   $user->Nom_Medecin;
@@ -332,29 +401,63 @@
                                     $Annee              =   implode(',', $years); 
                                     $dateE              =   date('Y-m-d');
 
-                                    $_SESSION['cotisation'] = (object) array(
-                                        'NTransaction'      =>  $NTransaction,
-                                        'NAutorisation'     =>  $NAutorisation,
-                                        'NCommande'         =>  $NCommande,
-                                        'NCarte'            =>  $NCarte,
-                                        'Montant'           =>  $montant,
-                                        'MontantAff'        =>  $montantAff,
-                                        'DatePaiement'      =>  $DatePaiement,
-                                        'HeurePaiement'     =>  $HeurePaiement,
-                                        'Annees'            =>  $years,
-                                        'DateE'             =>  $dateE
-                                    );
+                                    $_verifCotisation = verifCotisation($CIN, $Annee, $cache);
+                                    if ($_verifCotisation == 0) {
+                                        header('Location:view.noPaid.php?msg=no_old_year');
+                                    }
+                                    else if ($_verifCotisation == -1) {
+                                        header('Location:view.noPaid.php?msg=no_all_years');
+                                    }
+                                    else if ($_verifCotisation == 2) {
+                                        $_SESSION['cotisation'] = (object) array(
+                                            'NTransaction'      =>  $NTransaction,
+                                            'NAutorisation'     =>  $NAutorisation,
+                                            'NCommande'         =>  $NCommande,
+                                            'NCarte'            =>  $NCarte,
+                                            'Montant'           =>  $montant,
+                                            'MontantAff'        =>  $montantAff,
+                                            'DatePaiement'      =>  $DatePaiement,
+                                            'HeurePaiement'     =>  $HeurePaiement,
+                                            'Annees'            =>  $years,
+                                            'DateE'             =>  $dateE
+                                        );
 
-                                    $Nom = str_replace('\'', '', $Nom);
+                                        $Nom = str_replace('\'', '', $Nom);
 
-                                    $addTransaction = addTransaction($CIN, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Prix, $DatePaiement, $HeurePaiement, $Annee, $dateE);
+                                        $addTransaction = addTransaction($CIN, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Prix, $DatePaiement, $HeurePaiement, $Annee, $dateE);
 
-                                    if ($addTransaction) {
-                                        header("Location:API_PHP/index.php");
+                                        if ($addTransaction) {
+                                            header("Location:API_PHP/index.php");
+                                        }
+                                        else {
+                                            echo "<br> Une erreur est survenue, merci de contacter le support";
+                                        }
                                     }
                                     else {
-                                        echo "<br> Une erreur est survenue, merci de contacter le support";
-                                    } 
+                                        $_SESSION['cotisation'] = (object) array(
+                                            'NTransaction'      =>  $NTransaction,
+                                            'NAutorisation'     =>  $NAutorisation,
+                                            'NCommande'         =>  $NCommande,
+                                            'NCarte'            =>  $NCarte,
+                                            'Montant'           =>  $montant,
+                                            'MontantAff'        =>  $montantAff,
+                                            'DatePaiement'      =>  $DatePaiement,
+                                            'HeurePaiement'     =>  $HeurePaiement,
+                                            'Annees'            =>  $years,
+                                            'DateE'             =>  $dateE
+                                        );
+
+                                        $Nom = str_replace('\'', '', $Nom);
+
+                                        $addTransaction = addTransaction($CIN, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Prix, $DatePaiement, $HeurePaiement, $Annee, $dateE);
+
+                                        if ($addTransaction) {
+                                            header("Location:API_PHP/index.php");
+                                        }
+                                        else {
+                                            echo "<br> Une erreur est survenue, merci de contacter le support";
+                                        }
+                                    }      
                                 }
                                 else 
                                 {
@@ -397,22 +500,10 @@
                                 $montantPaid = $frais + $montant;
                                 $montantAff = $montant;
 
-
-                                // Trouver le code de region
-                                if ($user->NomRegion == 'Casablanca- Settat')
-                                {
-                                    $nRegion = 'Casablanca - Settat';
-                                }
-                                else 
-                                {
-                                    $nRegion = $user->NomRegion;
-                                }
-
-                                $oneRegion = getOneRegion($nRegion);
                                 $number = genererChaineAleatoire(); 
 
                                 // W + Code region + int(6) + yearDay + H
-                                $id_commande = 'W'. $oneRegion->Code_Reg .$number. date('zH');
+                                $id_commande = 'W'. $user->CINMedecin .$number. date('zH');
 
                                 $CIN                =   $user->CINMedecin;     
                                 $Nom                =   $user->Nom_Medecin;
@@ -644,6 +735,17 @@
                         // Section Footer
                         $Commercant             =   $_GET['Commercant'];
 
+                        // Vérification des cotisations
+                        $VerifCotisation        =       verifCotisation($CIN, $AnneeCotisation);
+                        $TypeMail               =       0;
+
+                        if ($VerifCotisation) {
+                            $TypeMail = 1;
+                        }
+                        else {
+                            $TypeMail = -1;
+                        }
+
                         // Enregistrement de Cotisation
                         $tabCotisation        =     explode(',', $AnneeCotisation); // est un array
                         $reverseTabCotisation =     array_reverse($tabCotisation);
@@ -674,13 +776,20 @@
                         // Formater le tableau en string
                         $stringIdCotisation = implode($TabIdCotisation, ',');
 
+                        // Update de la transaction
+
                         // Appel de la fonction d'ajout de cotisation
       	                //$addCotisation = AjoutCotisation($CIN, $NumCommande, $stringIdCotisation);
 
                         // Url pour génération de ticket
                         $url = "NumCommande=$NumCommande&NumTransaction=$NumTransaction&NumAutorisation=$NumAutorisation&Montant=$Montant&CIN=$CIN&Nom=$Nom&Email=$Email&NumCarte=$NumCarte&Region=$Region&Province=$Province&Date=$Date&AnneeCotisation=$AnneeCotisation&Commercant=$Commercant";
 
-                        header("Location:mail/notif.paiement.php?$url");                    
+                        if ($TypeMail == 1) {
+                            header("Location:mail/notif.paiement.php?$url");
+                        }
+                        else {
+                            header("Location:mail/notif.infraction.php?$url");
+                        }                
                     }
                     else {}
                 })();

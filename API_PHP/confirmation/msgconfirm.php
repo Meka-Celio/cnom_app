@@ -2,7 +2,7 @@
     session_start();
     ini_set('display_errors', '0');
     $_SESSION["lg"]="FR";
-  
+
 if($_REQUEST)
 {
     $idmsg=$_GET["idmsg"];

@@ -47,7 +47,7 @@
                                     <?php for($i=0; $i < count($AnneeVMNotPaid); $i++) { ?>
                                         <!-- Si la derniere annee payée < Annee non payée -->
                                         <?php if ($AnneeVMNotPaid[$i]->Annee > $LastYearPaid->Annee) { ?>
-                                          <tr>
+                                          <tr> 
                                               <td>
                                                 <label for=""><?= $AnneeVMNotPaid[$i]->Annee; ?></label>
                                                 <input type="checkbox" id="<?php echo $AnneeVMNotPaid[$i]->Id ?>" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" aria-details="<?= $i+1 ?>" placeholder=""> 
@@ -57,7 +57,7 @@
                                               <td id="montant-<?= $i ?>"><?= substr($AnneeVMNotPaid[$i]->AnneeMontant, 7); ?></td>
                                               <td><p class="label label-danger"><b>Non Payée</b></p></td>
                                             </tr>
-                                          <?php } ?>
+                                          <?php  } else { $cache++; } ?>
                                           <?php  } ?>
                                      <!-- /endfor -->
                                      <?php if ($medecin->CINMedecin == '*11') { ?>
@@ -99,6 +99,7 @@
                                       <?php } ?>
                                     <?php } ?> <!-- /end -->
                                     <input type="hidden" name="CINMedecin" value="<?= $medecin->CINMedecin ?>">
+                                    <input type="hidden" name="cache" value="<?= $cache ?>">
                                   </form>
                                 <!-- Si il n'y a pas de cotisation -->
                                 <?php } else { ?>

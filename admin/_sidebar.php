@@ -45,6 +45,12 @@
                           <span>Voir les cotisations</span>
                       </a>
                   </li>
+                  <li class="">
+                      <a class="" href="admin.view.allMedecin.php">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Tous les médecins</span>
+                      </a>
+                  </li>
               </ul>
               <!-- sidebar menu end-->
           </div>
