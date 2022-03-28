@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 // }
 
 $CINMedecin     =   "*11";
-$nom_medecin    =   "Abou Nabid";
+$nom_medecin    =   "Célestin";
 $Email          =   "nnhaud.celestin@gmail.com";
 $Telephone      =   "0";
 $region         =   "Casa";
@@ -38,6 +38,7 @@ $adresse_pro = "Casa";
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
+$mail->CharSet = "UTF-8";
 
 try {
         //Server settings
@@ -58,7 +59,7 @@ try {
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Recu de paiement';
+        $mail->Subject = 'Reçu de paiement';
         $mail->Body    = "
         <!DOCTYPE html>
 

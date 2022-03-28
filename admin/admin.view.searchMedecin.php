@@ -81,6 +81,7 @@
                 <div class="ligne-2 col-md-6">
                   <p>Adresse pro : <b><?php echo $infoMedecin->AdressePro ?></b></p>
                   <p>Province : <b><?php echo $infoMedecin->LibelleProvince ?></b></p>
+                  <p>Code Région : <b><?php echo $infoMedecin->AbreviationRegion ?></b></p>
                   <p>Region : <b><?php echo $infoMedecin->LibelleRegion ?></b></p>
                   <p>Telephone : <b><?php echo $infoMedecin->Telephone ?></b></p>
                 </div>

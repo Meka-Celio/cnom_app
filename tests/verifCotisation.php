@@ -2,108 +2,124 @@
 	require '../app.soapClient.php';
 	require '../model.collection.php';
 
+	$GetInfoMedecin = getInfoMedecin("*11");
+	$info_medecin = $GetInfoMedecin->GetInfoMedecinAvecAuthResult;
 
-	/**
-	 * Permet de vérifier si la dernière année à payer fait parti 
-	 * des années à payer dans le paiement en cours
-	 * 
-	 * @param string	$CINMedecin			La CIN du médecin qui paie
-	 * @param string	$chaine				Les années à payer sous forme de chaine de caractères
-	 * 
-	 * @var array		$AnneeVM			Tableau contenant les cotisation du médecin
-	 * @var array 		$yearsNotPaid		Tableau qui récupère les annéees
-	 * 
-	 * @var string		$oldOneYear			La plus vielle année à régler
-	 * @var string 		$firstYear			La plus récente année à régler
-	 * @var string 		$stringYears		La chaine de caractères des années
-	 * @var string 		$longueur_chaine	La longueur de la chaine de la plus récente à la plus ancienne année	
-	 * 	
-	 * @return int							Indication renvoyée pour savoir si la vérification est bonne ou pas
-	 */
+	$CINMedecin     =   "*11";
+	$nom_medecin    =   $info_medecin->NomComplet;
+	$Email          =   "nnhaud.celestin@gmail.com";
+	$Telephone      =   "0";
+	$region         =   $info_medecin->LibelleCommune;
+	$province       =   $info_medecin->LibelleProvince;
 
-	function verifCotisation ($CINMedecin, $chaine) {
+	$numrecu        =   2525;
+	$montant        =   500;
+	$somme          =   'Cinq cent dirahm';
+	$annee          =   2022;
+	$numcommande    =   "WRSK1474SDD";
 
-		// Récupération des impayees de $CINMedecin
-		$getImpayees = getCotisationNonPayer($CINMedecin);
+	$secteur = $info_medecin->SecteurMedecin;
+	$specialite = $info_medecin->SpecialiteMedecin;
+	$date_diplome = $info_medecin->DateDiplome;
+	$date_installation_recrutement = $info_medecin->DateRecrutement_Installation;
+	$daterecu = date('Y-m-d');
+	$adresse_pro = $info_medecin->AdressePro;
 
-		// Récupération du tableau des cotisations impayees 
-		$AnneeVM = $getImpayees->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee->AnneeVM;
+	// LES COTISATIONS
+	$cotisationsNonPayer  = getCotisationNonPayer($CINMedecin); 
+	$yearListNotPaid    =   $cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
+	$AnneeVMNotPaid = $yearListNotPaid->AnneeVM;
 
-		// Variables
-		$yearsNotPaid 		= 	[];
-		$oldOneYear 		= 	"";
-		$firstYear			=	"";
-		$stringYears		=	"";
-		$longueur_chaine	=	0;
-
-		if (is_array($AnneeVM)) {
-			// Ajout des années dans le tableau et du dernier element dans la variable $oldOneYear
-			for ($i=0; $i < count($AnneeVM); $i++) {
-				array_push($yearsNotPaid, $AnneeVM[$i]->Annee);
-				$oldOneYear = strval($AnneeVM[$i]->Annee);
-			}
-		}
-		else {
-			array_push($yearsNotPaid, $AnneeVM->Annee);
-		}
-
-		// Attribution de la première année
-		$firstYear	=	strval($yearsNotPaid[0]);
-		
-		// Vérifier que $oldOneYear est dans $chaine
-		if (stristr($chaine, $oldOneYear)) {
-			// vérifier que la premiere annee est dans la chaine
-			if (stristr($chaine, $firstYear))
-			{
-				$stringYears 	= implode(',', $yearsNotPaid);
-				$longueur_chaine = strlen($stringYears);
-
-				if (strlen($chaine) === $longueur_chaine) {
-					return 1;
-				}
-				else {
-					return -1;
-				}
-			}
-			else 
-			{
-				return 2;
-			}
-		} 
-		else {
-			return 0;
-		}
-	}
-
-	if (isset($_POST['submit'])) {
-		var_dump($_POST);
-		$CINMedecin 	= $_POST['CINMedecin'];
-		if (is_array($_POST['years'])) {
-			$years 	= implode(',', $_POST['years']);
-		}
-		else {
-			$years = $_POST['years'];
-		}
-		$validation = verifCotisation($CINMedecin, $years);
-		
-		echo "<h2>Résultats</h2>";
-
-		if ($validation == 0) {
-			echo "ERREUR : L'année la plus ancienne n'a pas été coché !";
-		} else if ($validation == -1) {
-			echo "ERREUR : Vous ne pouvez pas régulariser l'année la plus récente sans régulariser les autres !";
-		}
-		else if ($validation == 1) {
-			echo "SUCCES : Vous pouvez maintenant passer au paiement de vos cotisations !";
-		}
-		else {
-			echo "SUCCES : Pensez à vous mettre à jour";
-		}
-	}
+	$cache = 0;
 
 ?>
 
-<form action="#" method="post">
+<table cellspacing="1" 
+cellpadding="10" 
+border="1">
+	<tbody>
+		<tr>
+			<th>CIN</th>
+			<th>NOM</th>
+			<th>EMAIL</th>
+			<th>TELEPHONE</th>
+			<th>REGION</th>
+			<th>PROVINCE</th>
+			<th>NUMRECU</th>
+			<th>MONTANT</th>
+			
+		</tr>
+		<tr>
+			<td><?= $CINMedecin ?></td>
+			<td><?= $nom_medecin ?></td>
+			<td><?= $Email ?></td>
+			<td><?= $Telephone ?></td>
+			<td><?= $region ?></td>
+			<td><?= $province ?></td>
+			<td><?= $numrecu ?></td>
+			<td><?= $montant ?></td>
+			
+		</tr>
+
+		<tr>
+			<th>SOMME</th>
+			<th>ANNEE</th>
+			<th>NUMCOMMANDE</th>
+			<th>SECTEUR</th>
+			<th>SPECIALITE</th>
+			<th>DATE DIPLOME</th>
+			<th>DATE INSTALLATION</th>
+			<th>DATE RECU</th>
+		</tr>
+		<tr>
+			<td><?= $somme ?></td>
+			<td><?= $annee ?></td>
+			<td><?= $numcommande ?></td>
+			<td><?= $secteur ?></td>
+			<td><?= $specialite ?></td>
+			<td><?= $date_diplome ?></td>
+			<td><?= $date_installation_recrutement ?></td>
+			<td><?= $daterecu ?></td>
+		</tr>
+
+		<tr>
+			<th colspan="8">ADRESSE PRO</th>
+		</tr>
+		<tr>
+			<td colspan="8"><?= $adresse_pro ?></td>
+		</tr>
+	</tbody>
+</table>
+
+<br><br><br>
+
+<table cellpadding="8">
+	<tbody>
+		<form action="test.controller.php?action=verifC" method="post">
+
+			<input type="hidden" name="CIN" value="<?= $CINMedecin ?>">
+			<input type="hidden" name="cache" value="<?= $cache ?>">
+
+			<?php foreach ($AnneeVMNotPaid as $NotPaid)  { ?>
+				<tr>
+					<td><input type="checkbox" name="NotPaid[]" value="<?= $NotPaid->AnneeMontant ?>"></td> 
+					<td><?= $NotPaid->Annee ?></td>
+					<td><?= substr($NotPaid->AnneeMontant, 7) ?> DH</td>
+				</tr>
+			<?php } ?>
+
+			<tr>
+				<td>
+					<input type="submit" name="submit" value="Payer Ma cotisation">
+				</td>
+			</tr>
+				
+
+		</form>
+	</tbody>
+</table>
+
+<!-- <form action="test.controller.php?action=verifC" method="post">
 	<input type="hidden" name="CINMedecin" value="*11">
 	<label for="">2022 <input type="checkbox" name="years[]" id="" value="2022"></label>
 	<label for="">2021 <input type="checkbox" name="years[]" id="" value="2021"></label>
@@ -112,8 +128,8 @@
 	<input type="submit" name="submit" value="Payer ma cotisation">
 </form>
 
-<form action="#" method="post">
+<form action="test.controller.php?action=verifC" method="post">
 	<input type="hidden" name="CINMedecin" value="GB186224">
 	<label for="">2022 <input type="radio" name="years" id="" value="2022"></label>
 	<input type="submit" name="submit" value="Payer ma cotisation">
-</form>
+</form> -->
