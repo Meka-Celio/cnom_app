@@ -9,7 +9,7 @@
 	$nom_medecin    =   $info_medecin->NomComplet;
 	$Email          =   "nnhaud.celestin@gmail.com";
 	$Telephone      =   "0";
-	$region         =   $info_medecin->LibelleCommune;
+	$region         =   $info_medecin->LibelleRegion;
 	$province       =   $info_medecin->LibelleProvince;
 
 	$numrecu        =   2525;
@@ -18,17 +18,17 @@
 	$annee          =   2022;
 	$numcommande    =   "WRSK1474SDD";
 
-	$secteur = $info_medecin->SecteurMedecin;
-	$specialite = $info_medecin->SpecialiteMedecin;
-	$date_diplome = $info_medecin->DateDiplome;
-	$date_installation_recrutement = $info_medecin->DateRecrutement_Installation;
-	$daterecu = date('Y-m-d');
-	$adresse_pro = $info_medecin->AdressePro;
+	$secteur 						= $info_medecin->SecteurMedecin;
+	$specialite 					= $info_medecin->SpecialiteMedecin;
+	$date_diplome 					= $info_medecin->DateDiplome;
+	$date_installation_recrutement 	= $info_medecin->DateRecrutement_Installation;
+	$daterecu 						= date('Y-m-d');
+	$adresse_pro 					= $info_medecin->AdressePro;
 
 	// LES COTISATIONS
-	$cotisationsNonPayer  = getCotisationNonPayer($CINMedecin); 
-	$yearListNotPaid    =   $cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
-	$AnneeVMNotPaid = $yearListNotPaid->AnneeVM;
+	$cotisationsNonPayer  	= getCotisationNonPayer($CINMedecin); 
+	$yearListNotPaid    	= $cotisationsNonPayer->GetCotisationNonPayerAvecAuthResult->MedecinCotisation->listeAnnee;
+	$AnneeVMNotPaid 		= $yearListNotPaid->AnneeVM;
 
 	$cache = 0;
 
@@ -95,18 +95,23 @@ border="1">
 
 <table cellpadding="8">
 	<tbody>
-		<form action="test.controller.php?action=verifC" method="post">
+		<form action="test.controller.php?action=paiement" method="post">
 
+			<!-- Donnees pour la fonction de vérification -->
 			<input type="hidden" name="CIN" value="<?= $CINMedecin ?>">
 			<input type="hidden" name="cache" value="<?= $cache ?>">
 
+			<?php $data_id = 0 ?>
+
 			<?php foreach ($AnneeVMNotPaid as $NotPaid)  { ?>
 				<tr>
-					<td><input type="checkbox" name="NotPaid[]" value="<?= $NotPaid->AnneeMontant ?>"></td> 
+					<td><input type="checkbox" name="NotPaid[]" value="<?= $NotPaid->AnneeMontant ?>" data-id="<?= $data_id++ ?>"></td> 
 					<td><?= $NotPaid->Annee ?></td>
 					<td><?= substr($NotPaid->AnneeMontant, 7) ?> DH</td>
 				</tr>
 			<?php } ?>
+
+			<input type="hidden" name="" value="">
 
 			<tr>
 				<td>
@@ -118,18 +123,3 @@ border="1">
 		</form>
 	</tbody>
 </table>
-
-<!-- <form action="test.controller.php?action=verifC" method="post">
-	<input type="hidden" name="CINMedecin" value="*11">
-	<label for="">2022 <input type="checkbox" name="years[]" id="" value="2022"></label>
-	<label for="">2021 <input type="checkbox" name="years[]" id="" value="2021"></label>
-	<label for="">2020 <input type="checkbox" name="years[]" id="" value="2020"></label>
-	<label for="">2019 <input type="checkbox" name="years[]" id="" value="2019"></label>
-	<input type="submit" name="submit" value="Payer ma cotisation">
-</form>
-
-<form action="test.controller.php?action=verifC" method="post">
-	<input type="hidden" name="CINMedecin" value="GB186224">
-	<label for="">2022 <input type="radio" name="years" id="" value="2022"></label>
-	<input type="submit" name="submit" value="Payer ma cotisation">
-</form> -->

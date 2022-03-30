@@ -1,15 +1,12 @@
 <?php 
-	require '../app.soapClient.php';
-  	require '../model.collection.php';
 
-  	if (!isset($_POST['submit']))
-  	{
-  		header("Location:admin.view.addCotisation.php?msg=403");
-  	}
-  	else 
-  	{	
-		$NumTransaction =	$_POST['NumTransaction'];
-  		$CIN 			= 	$_POST['CIN'];
+    require     '../app.soapClient.php';
+    require     '../model.collection.php';
+
+    function RecupererRecu ($NumCommande, $CINMedecin) 
+    {
+        $NumTransaction =	$NumCommande;
+  		$CIN 			= 	$CINMedecin;
   		
   		// Récupération du reçu
   		$getRecu = GetRecuCotisation($NumTransaction, $CIN);
@@ -77,7 +74,6 @@
 	  		// Si il y a une seule ligne
 	  		else 
 	  		{
-
 	  			// Données variables en fonction du nbr années payées
 			  	$recu_CINMedecin        = $recu_paiement->CINMedecin;
 			  	$recu_NumTransaction    = $recu_paiement->NumRecuTransaction;
@@ -106,8 +102,7 @@
 
 	  		} //endelse
 
-	  		session_start();
-	  		$_SESSION['RecuPaiement'] = (object) array (
+	  		$recuPaiement = (object) array (
 	  			'CINMedecin'					=>	$recu_CINMedecin,
 	  			'NumTransaction'				=>	$recu_NumTransaction,
 	  			'NumRecu'						=>	$recu_NumRecu,
@@ -127,13 +122,61 @@
 	  		);
 
 
-	  		header('Location:admin.view.getRecu.php?msg=createCotOk');
+	  		return $recuPaiement;
 
   		} 
   		// Fin de 'Si Recu de paiement'
   		else 
   		{
-  			header("Location:admin.view.addCotisation.php?msg=findCotFail");
+  			return 0;
   		}
-  	}
+    }
+
+    // Output
+    /**
+     * CINMedecin - string
+     * NumTransaction - string
+     * [NumRecu] - array / string
+     * Nom
+     * SecteurMedecin
+     * SpecialiteMedecin
+     * DateDiplome
+     * DateRecrutement_Installation
+     * AdressePro
+     * Province
+     * Region
+     * DateCreation
+        ["AnneePayee"]
+        ["MontantCotisation"]
+        ["Somme"]
+     * Email
+     */
+
+    $getRecu = RecupererRecu('WQ2973581834008814', 'Q297358');
+    // echo "<pre>";
+    // var_dump($getRecu);
+    // echo "</pre>";
+
+    if ($getRecu) {
+       if (is_array($getRecu->AnneePayee)) {
+           $AnneePayee = implode(',', $getRecu->AnneePayee);
+           $NumRecu =   implode(',', );
+           echo "Annee payee : $AnneePayee";
+       }
+       else {
+           echo "il y a un seul reçu";
+       }
+    }
+    else {
+        echo "il ny a pas de recu";
+    }
+
 ?>
+
+
+
+<form action="#" method="post">
+    <input type="text" name="cin" id="" placeholder="CIN">
+    <input type="text" name="ncommande" id="" placeholder="Ncommande">
+    <input type="submit" name="submit" value="Avoir recu">
+</form>

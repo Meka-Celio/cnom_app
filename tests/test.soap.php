@@ -1,6 +1,6 @@
-<!-- <?php
-// hargement de la page SOAP Client
-    require 'app.soapClient.php';
+<?php
+// chargement de la page SOAP Client
+    require '../app.soapClient.php';
 
     
 

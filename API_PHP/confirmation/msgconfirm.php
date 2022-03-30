@@ -82,7 +82,7 @@ $url_NumCarte           =   $_SESSION['numCarte'];
 $url_Commercant         =   $_SESSION['nom_cmr'];
 
 $urlTicket =  "../../app.controller.php?action=ticketPaiement&CIN=$url_CIN&Nom=$url_Nom&Email=$url_Mail&Province=$url_Province&Region=$url_Region&AnneeCotisation=$url_AnneeCotisation&NumCommande=$url_NumCommande&NumTransaction=$url_NumTransaction&NumAutorisation=$url_NumAutorisation&DateTransaction=$url_DateTransaction&HeureTransaction=$url_HeureTransaction&Montant=$url_Montant&NumCarte=$url_NumCarte&Commercant=$url_Commercant";
-
+header("Location:$urlTicket");
     ?>
 <!DOCTYPE html>
 <html>

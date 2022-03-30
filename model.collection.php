@@ -48,7 +48,7 @@
         }
     }
 
-    function getProvinceByID ($id_province) {
+    function getProvinceByID ($id_province) { 
         try {
             $con =  databaseConnexion();
             $sql =  "SELECT * FROM provinces WHERE ID_Province = $id_province";
@@ -401,7 +401,22 @@
     function addTransaction ($CINMedecin, $Nom, $Email, $Tel, $NTransaction, $NAutorisation, $NCommande, $NCarte, $Montant, $DatePaiement, $HeurePaiement, $Annee, $dateE) {
 		try{
 			$con = databaseConnexion();
-            $sql = "INSERT INTO paiements VALUES ('0','$CINMedecin', '$Nom', '$Email', '$Tel', '$NTransaction', '$NAutorisation', '$NCommande', '$NCarte', $Montant, '$DatePaiement', '$HeurePaiement', '$Annee','$dateE', '0')";
+            $sql = "INSERT INTO paiements VALUES (
+                '0',
+                '$CINMedecin', 
+                '$Nom', 
+                '$Email', 
+                '$Tel', 
+                '$NTransaction', 
+                '$NAutorisation', 
+                '$NCommande', 
+                '$NCarte', 
+                 $Montant, 
+                '$DatePaiement', 
+                '$HeurePaiement', 
+                '$Annee',
+                '$dateE', 
+                '0')";
 			// Si la requete fonctionne
             if ($res = $con->query($sql)) {
                 $action = 1;

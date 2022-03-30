@@ -1,6 +1,6 @@
 <?php 
-    require '../app.soapClient.php';
-    require_once '../model.collection.php';
+    require 		'../app.soapClient.php';
+    require_once 	'../model.collection.php';
 
     // ---------------------------------------------
     // FONCTION D'ACTIONS
@@ -88,6 +88,8 @@
 		}
 	}
 
+
+
 	// ------------------------------------------------------------------------
 	// -------------------------- MAIN ------------------------------
 	// ------------------------------------------------------------------------
@@ -95,11 +97,29 @@
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
         switch($action) {
-            case 'verifC':
-                (function () {
+			// Fonction exécutée après coche des années
+            case 'paiement':
+				// Informations requises
+				/**
+				 * La CIN
+				 * Le Nom du medecin
+				 * L'email
+				 * Le Tel
+				 * Le N° de transaction*
+				 * Le N° autorisation
+				 * Le N° commande
+				 * Le N° Carte
+				 * Le montant 
+				 * la date 
+				 * L'heure
+				 * L'annee payée
+				 * Date enregistrement
+				 * La validation
+				 */
+				(function () {
                     
                     if (isset($_POST['submit'])) {
-						// var_dump($_POST);
+						var_dump($_POST);
 						$cin = $_POST['CIN'];
 						$cache = $_POST['cache'];
 
@@ -118,5 +138,33 @@
 
                 })();
                 break;
+			
+			// Fonction exécutée lors de l'arrivée sur la page de récap
+			case 'ticket':
+				// Informations requises
+				/**
+				 * La CIN
+				 * Le Nom du medecin
+				 * L'email
+				 * Le N° de transaction*
+				 * Le N° autorisation
+				 * Le N° commande
+				 * Le N° Carte
+				 * Le montant 
+				 * la date 
+				 * L'heure
+				 * L'annee payée
+				 */
+				(function () {
+
+				})();
+				break;
+			
+			// Fonction executée lorsque les tickets sont partis
+			case 'recu':
+				(function () {
+
+				})();
+				break;
         }
     }
