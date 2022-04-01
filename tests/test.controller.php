@@ -163,7 +163,7 @@
 			// Fonction executée lorsque les tickets sont partis
 			case 'recu':
 				(function () {
-
+					
 				})();
 				break;
         }

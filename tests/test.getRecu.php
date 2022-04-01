@@ -37,7 +37,6 @@
 		  	// Si il y a plusieurs lignes
 	  		if (is_array($recu_paiement))
 	  		{
-	  			
 	  			// Données variables en fonction du nbr années payées
 			  	$recu_CINMedecin        = $recu_paiement[0]->CINMedecin;
 			  	$recu_NumTransaction    = $recu_paiement[0]->NumRecuTransaction;
@@ -124,12 +123,11 @@
 
 	  		return $recuPaiement;
 
-  		} 
-  		// Fin de 'Si Recu de paiement'
+  		} // endif
   		else 
   		{
   			return 0;
-  		}
+  		} // endesle
     }
 
     // Output
@@ -158,14 +156,37 @@
     // echo "</pre>";
 
     if ($getRecu) {
+
+		$CINMedecin 					=	$getRecu->CINMedecin;
+		$numcommande					=	$getRecu->NumTransaction;
+		$nom_medecin 					=	$getRecu->Nom;
+		$secteur 						=	$getRecu->SecteurMedecin;
+		$specialite 					=	$getRecu->SpecialiteMedecin;
+		$date_diplome 					=	$getRecu->DateDiplome;
+		$date_installation_recrutement 	=	$getRecu->DateRecrutement_Installation;
+		$adresse_pro 					=	$getRecu->AdressePro;
+		$province 						=	$getRecu->Province;
+		$region 						=	$getRecu->Region;
+		$daterecu 						=	$getRecu->DateCreation;
+		$email 							=	$getRecu->Email;
+
+		/**
+		 */
+
        if (is_array($getRecu->AnneePayee)) {
-           $AnneePayee = implode(',', $getRecu->AnneePayee);
-           $NumRecu =   implode(',', );
-           echo "Annee payee : $AnneePayee";
+           $annee 				= 	implode(',', $getRecu->AnneePayee);
+           $numrecu 			= 	implode(',', $getRecu->NumRecu);
+		   $montant 			= 	implode(',', $getRecu->MontantCotisation);
+		   $somme 				=	implode(',', $getRecu->Somme);
        }
        else {
-           echo "il y a un seul reçu";
+		$annee 		= 	$getRecu->AnneePayee;
+		$numrecu 	= 	$getRecu->NumRecu;
+		$montant 	= 	$getRecu->MontantCotisation;
+		$somme 		=	$getRecu->Somme;
        }
+	   $url = "../mail/test.recu.mail.php?CINMedecin=$CINMedecin&numcommande=$numcommande&nom_medecin=$nom_medecin&secteur=$secteur&specialite=$specialite&date_diplome=$date_diplome&date_installation_recrutement=$date_installation_recrutement&adresse_pro=$adresse_pro&province=$province&region=$region&daterecu=$daterecu&email=$email&annee=$annee&numrecu=$numrecu&montant=$montant&somme=$somme";
+	   header("Location:$url");
     }
     else {
         echo "il ny a pas de recu";

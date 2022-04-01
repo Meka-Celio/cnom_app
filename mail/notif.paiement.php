@@ -10,7 +10,30 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
-// Récupération des éléments du recu de paiement
+// Section entete
+$NumCommande            =   'WQ2973581834008814';
+$NumTransaction         =   'xxx';
+$NumAutorisation        =   'xx23';
+$Montant                =   1000;
+
+// Section User
+$CIN                    =   'Q297358';
+$Nom                    =   'Celio';
+$Email                  =   'easymoi@yahoo.fr';
+$NumCarte               =   'none';
+$Region                 =   'Casa';
+$Province               =   'Xasa';
+
+// Section Content
+$Date                   =   date('d/m/Y');
+$stringAnneesCotisation =   '2022,2021'; // String
+$AnneeCotisation        =   explode(',', $stringAnneesCotisation); // Peut etre un array ou non
+
+// Section Footer
+$Commercant             =   $_GET['Commercant'];
+
+/*
+// Récupération des éléments du paiement
 if (isset($_GET['CIN'])) {
 
     // Section entete
@@ -42,10 +65,11 @@ if (isset($_GET['CIN'])) {
 else {
     header('Location:../view.dashboard.php?msg=noPaid');
 }
-
+*/
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
+$mail->CharSet = "UTF-8";
 
 try {
         //Server settings
@@ -62,7 +86,7 @@ try {
         $mail->setFrom('contact@cnom.ma', 'Service Espace Cotisation');
         $mail->addAddress($Email, "CIN : $CIN");     //Add a recipient
         $mail->addBCC('contact@cnom.ma');
-        $mail->addBCC('support@cnom.ma', 'Support Espace Cotisation CNOM');
+		$mail->addBCC('c.meka@rachabusinessgroup.com', 'Racha Digital IT Service');
 
         if (is_array($AnneeCotisation)) { // Si plusieurs cotisations
 
@@ -111,7 +135,8 @@ try {
 
                 $mail->send();
             } // endfor
-            header('Location:../view.dashboard.php?msg=payOk');
+            //header('Location:../view.dashboard.php?msg=payOk');
+            header("Location:../app.controller.php?action=recu_paiement&CIN=$CIN&NumCommande=$NumCommande&Annees=$stringAnneesCotisation&email=$Email");
         }
         else {
             //Content
