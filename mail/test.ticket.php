@@ -136,7 +136,7 @@ try {
                 $mail->send();
             } // endfor
             //header('Location:../view.dashboard.php?msg=payOk'); 
-            header("Location:../app.controller.php?action=recu_paiement&CIN=$CIN&NumCommande=$NumCommande&Annees=$stringAnneesCotisation&email=$Email");
+            header("Location:../test.controller.php?action=recu_paiement&CIN=$CIN&NumCommande=$NumCommande&Annees=$stringAnneesCotisation&email=$Email");
         }
         else {
             //Content

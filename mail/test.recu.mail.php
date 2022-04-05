@@ -365,7 +365,7 @@ if (isset($_GET['CINMedecin'])) {
 
         $mail->send();
         }
-        header("Location:admin.view.addCotisation.php?msg=$msg&CINMedecin=$CINMedecin&NumTransaction=$numcommande");
+        header("Location:../test.send.php?admin.view.addCotisation.php?msg=$msg&CINMedecin=$CINMedecin&NumTransaction=$numcommande");
     } 
     catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -375,4 +375,4 @@ else {
     header('Location../view.error.php?msg=403');
 }
 
-    
+    // https://cnom.ma/procedure-paiement-en-ligne/

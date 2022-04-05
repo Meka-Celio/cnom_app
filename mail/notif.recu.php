@@ -365,7 +365,7 @@ if (isset($_GET['CINMedecin'])) {
 
         $mail->send();
         }
-        header("Location:admin.view.addCotisation.php?msg=$msg&CINMedecin=$CINMedecin&NumTransaction=$numcommande");
+        header('Location:../view.dashboard.php?msg=payOk');
     } 
     catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

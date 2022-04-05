@@ -155,4 +155,26 @@
         }
     }
 
+    function updateMailOnMarit ($CINMedecin, $Email) {
+        $clientSOAP = createClientSoap();
+
+        // PARAMETTRES POUR LA FONCTION
+        $params = array(
+            'sCINMedecin' 	=>	$CINMedecin,
+            'sEmail'        =>  $Email,
+            'sLogin'		=>	LOGIN,
+            'sPwd'			=>	PWD	
+        );
+
+        try {
+            $data = $clientSOAP->UpdateEmailMedecinAvecAuth($params);
+            return $data;
+        }
+        catch (SoapFault $exception) {
+            echo "<b>Une erreur a été détectée, la requête a échoué !</b> \n ".$exception->getMessage();
+        }
+    }
+
+
+
 ?>

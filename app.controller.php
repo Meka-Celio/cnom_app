@@ -772,6 +772,7 @@
                                         {
                                             updateDateModification($CINMedecin);
                                             updateEmail($CINMedecin, $Email);
+                                            updateMailOnMarit($CINMedecin, $Email);
                                             header("Location:mail/notif.firstCon.php?CIN=$CINMedecin&Email=$Email");
                                         }
                                 }
@@ -995,7 +996,6 @@
                         $Email          =   $_GET['email'];
 
                         $getRecu = RecupererRecu($NumCommande, $CIN);
-                        var_dump($getRecu);
 
                         if ($getRecu) {
 
