@@ -147,7 +147,7 @@
 
       	if ($addCotisation) {
 
-			if (isset($CINMedecin))
+				if (isset($CINMedecin))
 				{
 					// $CIN            =   $_GET['CIN'];
 					// $NumCommande    =   $_GET['NumCommande'];
@@ -192,9 +192,7 @@
 					else {
 						echo "il ny a pas de recu";
 					}
-
 				}
-
       	}
       	else 
       	{

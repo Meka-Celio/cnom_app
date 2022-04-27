@@ -3,78 +3,10 @@
   require 'app.soapClient.php';
   require 'model.collection.php';
 
-  function verifyEmail ($databaseEmail, $webserviceEmail) {
-    $pattern = "/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i";
-
-    if (preg_match($pattern, $databaseEmail)) {
-      $email = $databaseEmail;
-      $has_mail = 1;
-    } 
-    else 
-    {
-      if (preg_match($pattern, $webserviceEmail)) {
-        $email = $webserviceEmail;
-        $has_mail = 1;
-      }
-      else {
-        $email = "";
-        $has_mail = 0;
-      }
-    }
-    return [$has_mail, $email];
-  }
 
   if (isset($_SESSION['medecin'])) {
     $medecin = $_SESSION['medecin'];
-
-    // Mise à jour information médecin
-    $cin = $medecin->CINMedecin;
-    $DBtelephone = $medecin->Telephone;
-    $DBemail = $medecin->Email;
-    $DBregion = $medecin->NomRegion;
-    $DBprovince = $medecin->NomProvince;
- 
-    $GetInfoMedecin = getInfoMedecin($cin);
-    $response = $GetInfoMedecin->GetInfoMedecinAvecAuthResult;
-
-    // Informations récdupéré du webservice
-    $wemail = $response->Email;
-    $wtelephone = $response->TelephoneMobile;
-    $wregion = $response->LibelleRegion;
-    $wprovince = $response->LibelleProvince;
-    
-    $wsecteurMedecin = $response->SecteurMedecin;
-    $wspecialite = $response->SpecialiteMedecin;
-    $wdateDiplome = $response->DateDiplome;
-    $wdateRecrutement = $response->DateRecrutement_Installation;
-    $wadresse = $response->AdressePro;
-
-    $verifMail = null;
-
-    $has_mail = "";
-    $email = "";
-
-    if (isset($_GET['maj'])) {
-      $maj = $_GET['maj'];
-
-      $verifMail = verifyEmail($DBemail, $wemail);
-
-      $has_mail = $verifMail[0];
-      $email = $verifMail[1];
-
-    }
-    else 
-    {
-      $verifMail = verifyEmail($DBemail, $wemail);
-
-      $has_mail = $verifMail[0];
-      $email = $verifMail[1];
-
-    }
-    
-
-  } 
-  else {
+  } else {
     header('Location:form.login.php?msg=user_404');
   }
 
@@ -108,8 +40,7 @@
     }
   }
 
-$cache = 0;
-
+  $cache = 0;
 
 ?>
 
@@ -133,7 +64,7 @@ $cache = 0;
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
 
     <!-- Filtre -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -144,9 +75,18 @@ $cache = 0;
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175457894-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    <script src="https://kit.fontawesome.com/35e918c145.js" crossorigin="anonymous"></script>
+    gtag('config', 'UA-175457894-2');
+  </script>
 
+  
   </head>
 
   <body>
@@ -162,30 +102,16 @@ $cache = 0;
             <!--logo end-->
 
             <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
+              <ul class="nav pull-right top-menu">
                   <li><a class="logout" href="app.logout.php">Deconnexion</a></li>
-            	</ul>
+              </ul>
             </div>
         </header>
       <!--header end-->
 
-       <!--  top menu -->
-       <!-- <div class="nav" id="top_menu">
-         <ul class="nav top-menu">
-           <li clas="nav-item-notify"><a href="view.dashboard.php">Tableau de bord</a></li>
-           <li clas="nav-item-notify"><a href="view.noPaid.php" class="btn btn-danger">Impayées</a></li>
-           <li clas="nav-item-notify"><a href="view.paid.php">Historique</a></li>
-           <li clas="nav-item-notify"><a href="view.user.php">Mon Profil</a></li>
-           <li clas="nav-item-notify"><a href="app.logout.php?msg=exit">Retour sur cnom.ma</a></li>
-          </ul>
-        </div>  -->
-        <div class="top-separateur"></div>
-
-        <!-- <div class="notif">
-          <p class="alert alert-info">Le service prendra fin à 23H</p>
-        </div> -->
-
-            <div class="container nav-option">
+      <div class="top-separateur"></div>
+      
+    <div class="container nav-option">
 
                 <!-- OPTIONS DASHBOARD -->
                 <div class="option-container">
@@ -218,11 +144,8 @@ $cache = 0;
                   </div>
                 </div>
 
-            </div>
+        </div>
 
-            <!-- Si il n'y a pas de mail -->
-            <?php if ($has_mail == 0) { ?>
-              <p class="text-danger hasNoMail">
-                Vous n'avez pas d'email, merci d'allez dans la section profil pour configurer votre email
-              </p>
-            <?php } ?>
+        <div class="notif">
+      <p class="alert alert-info"><a href="https://cnom.ma/procedure-paiement-en-ligne/" target="_blank">Procédure de paiement en ligne</a></p>
+    </div> 

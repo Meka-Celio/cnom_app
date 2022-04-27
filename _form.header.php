@@ -33,6 +33,9 @@
                 <div class="notification">
                   <?php if (isset($msg)) { require '_utils.php'; } ?>
                 </div>
+                <div id="rafraichir" style="color:#fff; font-size:20px; text-align:center">
+                  Merci de rafaichir la page avec [ctrl + F5] avant de vous conneter
+                </div>
                 <div class="branding">
                     <img src="assets/img/logo.jpeg" alt="logo cnom">
                 </div>

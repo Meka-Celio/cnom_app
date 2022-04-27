@@ -3,14 +3,16 @@
     require     '../app.soapClient.php';
     require     '../model.collection.php';
 
-    $getInfoMedecin = getInfoMedecin('*11');
-    echo "Avant <br>";
-    var_dump($getInfoMedecin);
 
     if (isset($_POST['submit'])) 
     {
+
         $cin = $_POST['CINMedecin'];
         $email = $_POST['Email'];
+
+        $getInfoMedecin = getInfoMedecin($email);
+        echo "Avant <br>";
+        var_dump($getInfoMedecin);
 
         $response = updateMailOnMarit($cin, $email);
 
@@ -32,7 +34,9 @@
 
 
 <?php if (isset($changement)) { 
-    $getInfoMedecin = getInfoMedecin('*11');
+    $getInfoMedecin = getInfoMedecin($email);
     echo "Après <br>";
     var_dump($getInfoMedecin);
 } ?>
+
+<?php var_dump(getInfoMedecin('ZG7228')); ?>

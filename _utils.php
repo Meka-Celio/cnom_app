@@ -40,7 +40,7 @@
 
     <?php } else if ($msg == "bad_mail") { ?>
         <div class="alert alert-danger alert-banner" role="alert">
-            L'adresse mail est <b>invalide !</b>
+            Votre adresse mail n'est pas configurée, merci de la renvoyer au support : support@cnom.ma
         </div>
 
     <?php } else if ($msg == 'null_tel') { ?>
@@ -66,7 +66,7 @@
     <?php } else if ($msg == 'payOk') { ?>
         <div class="alert alert-success alert-banner">
             <b>Votre paiement a bien été effectué !</b>
-            <br>Vous recevrez un mail contenant le ticket de paiement.
+            <br>Merci de vérifier vos mails et votre dossier spam
         </div>
 
     <?php } else if ($msg == 'setPwdOK') { ?>

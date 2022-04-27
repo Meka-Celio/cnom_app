@@ -489,6 +489,8 @@
                             if ($user) {
                                 session_start();
                                 $_SESSION['user'] = $user;
+                                $responseInfo       =   getInfoMedecin($user->CINMedecin);
+                                $webuser            =   $responseInfo->GetInfoMedecinAvecAuthResult;
 
                                 $valideMail = valideMail($user->Email);
 
@@ -513,7 +515,7 @@
                                     $number = genererChaineAleatoire(); 
 
                                     // W + Code region + int(6) + yearDay + H
-                                    $id_commande = 'W'. $user->CINMedecin .$number. date('zH');
+                                    $id_commande = 'W'. $webuser->AbreviationRegion .$number. date('zHi'); 
 
                                     $CIN                =   $user->CINMedecin;     
                                     $Nom                =   $user->Nom_Medecin;
@@ -772,7 +774,7 @@
                                         {
                                             updateDateModification($CINMedecin);
                                             updateEmail($CINMedecin, $Email);
-                                            updateMailOnMarit($CINMedecin, $Email);
+                                            //updateMailOnMarit($CINMedecin, $Email);
                                             header("Location:mail/notif.firstCon.php?CIN=$CINMedecin&Email=$Email");
                                         }
                                 }

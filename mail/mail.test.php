@@ -16,17 +16,17 @@ $mail = new PHPMailer(true);
 
 try {
 	    //Server settings
-	    $mail->SMTPDebug  = 0;                      // Enable verbose debug output
+	    $mail->SMTPDebug  = 2;                      // Enable verbose debug output
 	    $mail->isSMTP();                                            // Send using SMTP
-	    $mail->Host       = 'www.rachabusinessgroup.com';                    // Set the SMTP server to send through
+	    $mail->Host       = 'smtp.cnom.ma';                    // Set the SMTP server to send through
 	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	    $mail->Username   = 'rachabusinessgro';                     // SMTP username
-	    $mail->Password   = 'R@ch@2017';                               // SMTP password
+	    $mail->Username   = 'espacecotisation@cnom.ma';                     // SMTP username
+	    $mail->Password   = 'Cw20b59bf';                               // SMTP password
 	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
 	    $mail->Port       = 587; 
 
 	    //Recipients
-	    $mail->setFrom('c.meka@rachabusinessgroup.com', 'Mailer');
+	    $mail->setFrom('espacecotisation@cnom.ma', 'Mailer');
 	    $mail->addAddress('easymoi@yahoo.fr', 'Joe User');     //Add a recipient
 	    $mail->addAddress('nnhaud.celestin@gmail.com', 'Joe User');               //Name is optional
 	    // $mail->addReplyTo('info@example.com', 'Information');
@@ -40,7 +40,7 @@ try {
 	    //Content
 	    $mail->isHTML(true);                                  //Set email format to HTML
 	    $mail->Subject = 'Here is the subject';
-	    $mail->Body    = "";
+	    $mail->Body    = "Attention !!";
 	    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 	    $mail->send();

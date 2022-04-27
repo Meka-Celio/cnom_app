@@ -15,7 +15,6 @@
       *********************************************************************************************************************************************************** -->
 
 	<div id="login-page">
-
 		<div class="container">
 			
 			
@@ -43,8 +42,8 @@
 
 						<hr>
 						<span class="bottom-form">
-							<p>Pour toute information relative aux diverses procédures visitez le site du CNOM
-								<a href="https://cnom.ma/">Allez sur le site</a>
+							<p>Procédure de paiement en ligne
+								<a href="https://cnom.ma/procedure-paiement-en-ligne/" target="_blank">Voir la procédure</a>
 							</p>
 						</span>					
 					</div>
