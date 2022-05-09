@@ -5,8 +5,8 @@
     $user       = $_SESSION['user'];
     $cotisation = $_SESSION['cotisation'];
 
-    $frais =  round(($cotisation->Montant/98.68)*100*0.0136,2);
-    $montant = $cotisation->Montant+$frais;
+    $frais    =   $cotisation->Frais;
+    $montant  =   $cotisation->Montant+$frais;
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 //echo $actual_link."<br/>";

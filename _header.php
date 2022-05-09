@@ -53,7 +53,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CNOM APP - Mes Cotisations </title>
+    <title>CNOM APP - Mes Cotisations  - <?= $page ?></title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">

@@ -1,4 +1,4 @@
-<?php 
+<?php $page = "Tableau de bord";
   require ('_header.php');
 ?>
 

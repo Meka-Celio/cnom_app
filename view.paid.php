@@ -1,4 +1,5 @@
-<?php include '_header.php' ?>
+<?php $page = "Cotisations réglées"; 
+include '_header.php' ?>
 
 <!--main content start-->
 

@@ -1,4 +1,5 @@
-<?php include '_header.php' ?>
+<?php $page = "Mes Impayés";
+include '_header.php'; ?>
 
 <!--main content start-->
 
@@ -7,10 +8,10 @@
             <h3><i class="fa fa-angle-right"></i> Cotisations Impayées</h3>
 
             <?php if (isset($msg)) { include('_utils.php'); } ?>
+            <div class="container">
 
-            <!-- Mes Cotisations impayées -->
               <!-- Mes Cotisations impayées -->
-              <div class="row mt col-md-8">
+              <div class="row mt col-md-12">
                   <div class="cotisation-panel">
                     <p>Si vous avez des doutes concernant cette partie, merci de prendre attache avec votre CROM.</p>
                       <div class="content-panel">
@@ -33,7 +34,7 @@
                                 <?php if (isset($yearListNotPaid->AnneeVM)) { 
                                   $AnneeVMNotPaid = $yearListNotPaid->AnneeVM; ?>
 
-                                  <form action="app.controller.php?action=paiement" method="post">
+                                  <form action="view.card.php?a=paiement" method="post">
 
                                     <!-- Si il y a plusieurs lignes -->
                                     <?php if (is_array($AnneeVMNotPaid)) { ?>
@@ -49,10 +50,10 @@
                                         <?php if ($AnneeVMNotPaid[$i]->Annee > $LastYearPaid->Annee) { ?>
                                           <tr> 
                                               <td>
-                                                <label for=""><?= $AnneeVMNotPaid[$i]->Annee; ?></label>
+                                                <!-- <label for=""><?= $AnneeVMNotPaid[$i]->Annee; ?></label> -->
                                                 <input type="checkbox" id="<?php echo $AnneeVMNotPaid[$i]->Id ?>" name="NotPaid[]" value="<?= $AnneeVMNotPaid[$i]->AnneeMontant ?>" aria-details="<?= $i+1 ?>" placeholder=""> 
                                               </td>
-                                              <td><?php echo $AnneeVMNotPaid[$i]->Id ?></td>
+                                              <!-- <td><?php echo $AnneeVMNotPaid[$i]->Id ?></td> -->
                                               <td><?= $AnneeVMNotPaid[$i]->Annee; ?></td>
                                               <td id="montant-<?= $i ?>"><?= substr($AnneeVMNotPaid[$i]->AnneeMontant, 7); ?></td>
                                               <td><p class="label label-danger"><b>Non Payée</b></p></td>
@@ -112,6 +113,8 @@
                       </div><!-- /content-panel -->
                   </div><!-- /col-md-12 -->
               </div><!-- /row -->
+            </div>
+
 
       </section><! --/wrapper -->
   </section>

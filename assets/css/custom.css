@@ -1,9 +1,9 @@
 body {
-    color: #0b3d62;
+    color: #474848;
 }
 
 a {
-    color: #68dff0;
+    color: #0b3d62;
 }
 
 /* ---------------------------------------
@@ -83,9 +83,9 @@ Mes Classes
     overflow-y: scroll;
 }
 
-.cotisation-panel .content-panel {
+/* .cotisation-panel .content-panel {
     overflow: scroll;
-}
+} */
 
 .info-btn {
     text-align: center;
@@ -495,3 +495,77 @@ PARTIE ADMIN*
 .txt-red td {
     color: red;
 }
+
+
+/* --------------------------------------------
+Card type
+------------------------------------------*/
+@media screen and (max-width:430px) {
+    .card-types {
+        flex-direction: column;
+    }
+}
+.card-types {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-type-content {
+    margin: 20px;
+}
+
+.card-type {
+    width: 200px;
+    height: 110px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 30px 0px #0000004a;  
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.card-type a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 15px;
+    color: #0b3d62;
+}
+
+.card-international a
+ {
+    background-color: #0b3d62;
+    color: #fff;
+}
+
+.card-type a h5 {
+    font-size: 23px;
+}
+
+.btn-submit {
+    background-color: #0b3d62;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+}
+
+.btn-submit:hover,
+.btn-submit:focus {
+    color: #000;
+    background-color: #69acdf;
+}
+
+#card-form .form-group {
+    padding: 15px 0;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+#card-form .btn-submit {
+    padding: 10px 16px;
+}
+
