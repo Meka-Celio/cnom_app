@@ -598,7 +598,8 @@
                         // SI le mot de passe fais moins de 5 caractères
                         if (strlen($newPassword) < 5) {
                             header('Location:view.user.php?msg=toshortPassword');
-                        } else {
+                        } 
+                        else {
                             // Mot de passe déjà cripté et existant
                             if (password_verify($newPassword, $user->Pwd)) {
                                 header('Location:view.user.php?msg=existPassword');
